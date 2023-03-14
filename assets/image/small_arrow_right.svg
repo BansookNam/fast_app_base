@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="34.25" height="34" viewBox="0 0 34.25 34">
+  <g id="Group_18000" data-name="Group 18000" transform="translate(118 127) rotate(180)">
+    <rect id="Rectangle_10599" data-name="Rectangle 10599" width="34" height="34" transform="translate(84 93)" fill="none"/>
+    <g id="Group_17537" data-name="Group 17537" transform="translate(84 122.45) rotate(-90)">
+      <path id="Down_Arrow_3_" d="M12.516,0a1.152,1.152,0,0,0-.8.324L.333,11.367a1.081,1.081,0,0,0,0,1.562,1.162,1.162,0,0,0,1.609,0L12.516,2.666,23.09,12.929a1.162,1.162,0,0,0,1.609,0,1.081,1.081,0,0,0,0-1.562L13.321.324a1.152,1.152,0,0,0-.8-.324Z" transform="translate(0 0)" fill="#b5babf" stroke="#b5babf" stroke-width="0.5"/>
+    </g>
+  </g>
+</svg>
