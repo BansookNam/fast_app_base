@@ -32,20 +32,27 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             index: _currentIndex, children: const [HomeFragment(), FavoriteFragment()]),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: tabs
-            .mapIndexed((tab, index) => tab.toNavigationBarItem(
-                  context,
-                  isActivated: _currentIndex == index,
-                ))
-            .toList(),
+        items: navigationBarItems(context),
         currentIndex: _currentIndex,
-        selectedItemColor: Colors.black,
+        selectedItemColor: context.appColors.text,
+        unselectedItemColor: context.appColors.iconButtonInactivate,
         onTap: _handleTapTab,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
       ),
     );
+  }
+
+  List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
+    return tabs
+        .mapIndexed(
+          (tab, index) => tab.toNavigationBarItem(
+            context,
+            isActivated: _currentIndex == index,
+          ),
+        )
+        .toList();
   }
 
   void _handleTapTab(int index) {

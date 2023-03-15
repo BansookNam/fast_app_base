@@ -10,6 +10,6 @@ class HomeFragment extends StatelessWidget {
         onTap: () {
           Scaffold.of(context).openDrawer();
         },
-        child: 'Home'.text.make().centered());
+        child: '홈'.text.make().centered());
   }
 }

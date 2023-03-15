@@ -10,6 +10,6 @@ class FavoriteFragment extends StatelessWidget {
         onTap: () {
           Scaffold.of(context).openDrawer();
         },
-        child: 'Favorite'.text.make().centered());
+        child: '즐겨찾기'.text.make().centered());
   }
 }

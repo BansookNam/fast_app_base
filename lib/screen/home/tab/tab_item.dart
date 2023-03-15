@@ -8,8 +8,8 @@ class TabItem {
 
   TabItem._(this.activeIcon, this.inActiveIcon, this.tabName);
 
-  static final TabItem home = TabItem._(Icons.home, Icons.home_outlined, 'Home');
-  static final TabItem favorite = TabItem._(Icons.star, Icons.star_border_outlined, 'Favorite');
+  static final TabItem home = TabItem._(Icons.home, Icons.home_outlined, '홈');
+  static final TabItem favorite = TabItem._(Icons.star, Icons.star_border_outlined, '즐겨찾기');
 
   BottomNavigationBarItem toNavigationBarItem(BuildContext context, {required bool isActivated}) {
     return BottomNavigationBarItem(
