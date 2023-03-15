@@ -5,7 +5,7 @@ import '../common.dart';
 
 class CustomThemeHolder extends InheritedWidget {
   final AbstractThemeColors appColors;
-  final AppShadows appShadows;
+  final AbsThemeShadows appShadows;
   final CustomTheme theme;
   final Function(CustomTheme) changeTheme;
 

@@ -1,7 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 
-class LightAppShadows extends AppShadows {
+class LightAppShadows extends AbsThemeShadows {
   @override
   BoxShadow get buttonShadow => const BoxShadow(
         offset: Offset(4, 4),

@@ -20,7 +20,7 @@ enum CustomTheme {
     }
   }
 
-  AppShadows get appShadows {
+  AbsThemeShadows get appShadows {
     switch(this){
       case CustomTheme.dark:
         return DarkAppShadows();

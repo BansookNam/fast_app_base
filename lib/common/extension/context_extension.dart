@@ -39,19 +39,9 @@ extension ContextExtension on BuildContext {
 
   AbstractThemeColors get appColors => CustomThemeHolder.of(this).appColors;
 
-  AppShadows get appShadows => CustomThemeHolder.of(this).appShadows;
+  AbsThemeShadows get appShadows => CustomThemeHolder.of(this).appShadows;
 
   CustomTheme get themeType => CustomThemeHolder.of(this).theme;
 
   Function(CustomTheme) get changeTheme => CustomThemeHolder.of(this).changeTheme;
-
-  String? convertToLLLyyyyString(DateTime? dateTime) {
-    if (dateTime == null) {
-      return null;
-    }
-    final locale = this.locale;
-    return DateFormat(locale.languageCode == 'ko' ? 'yyyy년 LLL ' : 'LLL, yyyy',
-            locale.toStringWithSeparator())
-        .format(dateTime.toLocal());
-  }
 }
