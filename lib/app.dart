@@ -6,7 +6,7 @@ import 'package:fast_app_base/screen/home/s_home.dart';
 import 'package:flutter/material.dart';
 import 'package:nav/nav.dart';
 
-import 'common/theme/theme_data.dart';
+import 'common/theme/theme_util.dart';
 
 class App extends StatefulWidget {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
@@ -60,7 +60,7 @@ class AppState extends State<App> with Nav {
   }
 
   void _initSystemTheme() {
-    switch (AppTheme.systemBrightness) {
+    switch (ThemeUtil.systemBrightness) {
       case Brightness.dark:
         theme = CustomTheme.dark;
         break;

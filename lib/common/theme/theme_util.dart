@@ -5,7 +5,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../common.dart';
 
-class AppTheme {
+class ThemeUtil {
   static Brightness get systemBrightness =>
       SchedulerBinding.instance.platformDispatcher.platformBrightness;
 

@@ -8,7 +8,7 @@ import 'package:simple_shadow/simple_shadow.dart';
 import '../../../screen/dialog/d_message.dart';
 import '../../common/common.dart';
 import '../../common/language/language.dart';
-import '../../common/theme/theme_data.dart';
+import '../../common/theme/theme_util.dart';
 import '../../common/widget/w_empty_expanded.dart';
 import '../../common/widget/w_mode_switch.dart';
 
@@ -113,7 +113,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             child: ModeSwitch(
               value: context.isDarkMode,
               onChanged: (value) {
-                AppTheme.toggleTheme(context);
+                ThemeUtil.toggleTheme(context);
               },
               height: 30,
               activeThumbImage: Image.asset('$basePath/darkmode/moon.png'),
@@ -148,7 +148,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   }
 
   void toggleTheme() {
-    AppTheme.toggleTheme(context);
+    ThemeUtil.toggleTheme(context);
   }
 
   void closeDrawer(BuildContext context) {
