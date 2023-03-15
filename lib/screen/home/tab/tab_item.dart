@@ -5,6 +5,7 @@ class TabItem {
   final IconData activeIcon;
   final IconData inActiveIcon;
   final String tabName;
+  final navigationKey =  GlobalKey<NavigatorState>();
 
   TabItem._(this.activeIcon, this.inActiveIcon, this.tabName);
 
