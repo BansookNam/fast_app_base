@@ -1,8 +1,8 @@
-import 'package:fast_app_base/screen/home/tab/favorite/f_favorite.dart';
-import 'package:fast_app_base/screen/home/tab/home/f_home.dart';
 import 'package:fast_app_base/screen/home/tab/tab_item.dart';
+import 'package:fast_app_base/screen/home/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
 
+import '../../app.dart';
 import '../../common/common.dart';
 import 'w_menu_drawer.dart';
 
@@ -13,13 +13,23 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-  int _currentIndex = 0;
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.favorite];
+
+  int get _currentIndex => tabs.indexOf(_currentTab);
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override
@@ -29,19 +39,46 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       drawer: const MenuDrawer(),
       body: SafeArea(
         child: IndexedStack(
-            index: _currentIndex, children: const [HomeFragment(), FavoriteFragment()]),
+            index: _currentIndex, children: tabs.map((tab) => Offstage(
+          offstage: _currentTab != tab,
+          child: TabNavigator(
+            navigatorKey:tab.navigationKey,
+            tabItem: tab,
+          ),
+        )).toList()),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: navigationBarItems(context),
-        currentIndex: _currentIndex,
-        selectedItemColor: context.appColors.text,
-        unselectedItemColor: context.appColors.iconButtonInactivate,
-        onTap: _handleTapTab,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-      ),
+      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
+  }
+
+  BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
+    return BottomNavigationBar(
+      items: navigationBarItems(context),
+      currentIndex: _currentIndex,
+      selectedItemColor: context.appColors.text,
+      unselectedItemColor: context.appColors.iconButtonInactivate,
+      onTap: _handleTapTab,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      type: BottomNavigationBarType.fixed,
+    );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        App.isForeground = true;
+        break;
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.paused:
+        App.isForeground = false;
+        break;
+      case AppLifecycleState.detached:
+        break;
+    }
+    super.didChangeAppLifecycleState(state);
   }
 
   List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
@@ -57,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   void _handleTapTab(int index) {
     setState(() {
-      _currentIndex = index;
+      _currentTab = tabs[index];
     });
   }
 
@@ -71,4 +108,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ),
         label: label);
   }
+
+
 }

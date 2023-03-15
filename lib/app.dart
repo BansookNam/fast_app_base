@@ -10,6 +10,7 @@ import 'common/theme/theme_util.dart';
 
 class App extends StatefulWidget {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+  static bool isForeground = true;
 
   const App({super.key});
 
