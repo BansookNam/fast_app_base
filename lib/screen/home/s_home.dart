@@ -34,20 +34,36 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).canvasColor,
-      drawer: const MenuDrawer(),
-      body: SafeArea(
-        child: IndexedStack(
-            index: _currentIndex, children: tabs.map((tab) => Offstage(
-          offstage: _currentTab != tab,
-          child: TabNavigator(
-            navigatorKey:tab.navigationKey,
-            tabItem: tab,
-          ),
-        )).toList()),
+    return WillPopScope(
+      onWillPop: () async {
+        final isFirstRouteInCurrentTab = !await _currentTab.navigationKey.currentState!.maybePop();
+        if (isFirstRouteInCurrentTab) {
+          if (_currentTab != TabItem.home) {
+            _changeTab(tabs.indexOf(TabItem.home));
+            return false;
+          }
+        }
+        // maybePop 가능하면 나가지 않는다.
+        return isFirstRouteInCurrentTab;
+      },
+      child: Scaffold(
+        backgroundColor: Theme.of(context).canvasColor,
+        drawer: const MenuDrawer(),
+        body: SafeArea(
+          child: IndexedStack(
+              index: _currentIndex,
+              children: tabs
+                  .map((tab) => Offstage(
+                        offstage: _currentTab != tab,
+                        child: TabNavigator(
+                          navigatorKey: tab.navigationKey,
+                          tabItem: tab,
+                        ),
+                      ))
+                  .toList()),
+        ),
+        bottomNavigationBar: _buildBottomNavigationBar(context),
       ),
-      bottomNavigationBar: _buildBottomNavigationBar(context),
     );
   }
 
@@ -57,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen>
       currentIndex: _currentIndex,
       selectedItemColor: context.appColors.text,
       unselectedItemColor: context.appColors.iconButtonInactivate,
-      onTap: _handleTapTab,
+      onTap: _handleOnTapNavigationBarItem,
       showSelectedLabels: true,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
@@ -92,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen>
         .toList();
   }
 
-  void _handleTapTab(int index) {
+  void _changeTab(int index) {
     setState(() {
       _currentTab = tabs[index];
     });
@@ -109,5 +125,21 @@ class _HomeScreenState extends State<HomeScreen>
         label: label);
   }
 
+  void _handleOnTapNavigationBarItem(int index) {
+    final oldTab = _currentTab;
+    final targetTab = tabs[index];
+    if (oldTab == targetTab) {
+      final navigationKey = _currentTab.navigationKey;
+      () async {
+        final bool canPop = navigationKey.currentState?.canPop() == true;
+        if (canPop) {
+          while (navigationKey.currentState?.canPop() == true) {
+            navigationKey.currentState!.pop();
+          }
+        }
+      }();
+    }
 
+    _changeTab(index);
+  }
 }
