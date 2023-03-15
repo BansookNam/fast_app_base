@@ -1,12 +1,12 @@
 // import 'package:flutter/foundation.dart';
-import 'package:isar/isar.dart';
+// import 'package:isar/isar.dart';
 
 //
 // import '../../data/local/error/local_db_error.dart';
 // import '../network/result/result.dart';
 
 class LocalDB {
-  static late final Isar _isar;
+  //static late final Isar _isar;
 
 // static Future<void> init() async {
 //   _isar = await Isar.open([LocalDocumentSchema], maxSizeMiB: 512);

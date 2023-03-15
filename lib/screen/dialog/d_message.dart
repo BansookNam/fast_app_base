@@ -45,7 +45,7 @@ class _MessageDialogState extends DialogState<MessageDialog> {
                 constraints: const BoxConstraints(maxHeight: 500),
                 decoration: BoxDecoration(
                     color: context.appColors.drawerBg,
-                    borderRadius: BorderRadius.only(topLeft: radius, topRight: radius)),
+                    borderRadius: const BorderRadius.only(topLeft: radius, topRight: radius)),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -81,7 +81,7 @@ class _MessageDialogState extends DialogState<MessageDialog> {
                         decoration: BoxDecoration(
                             color: context.appColors.drawerBg,
                             borderRadius:
-                                BorderRadius.only(bottomLeft: radius, bottomRight: radius)),
+                                const BorderRadius.only(bottomLeft: radius, bottomRight: radius)),
                         child: Text(
                           widget.buttonText ?? 'close'.tr(),
                           style: TextStyle(

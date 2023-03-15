@@ -1,3 +1,5 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -160,7 +162,8 @@ class TextFieldWithDeleteState extends State<TextFieldWithDelete> {
                                 padding: EdgeInsets.only(right: widget.deleteRightPadding),
                                 child: SvgPicture.asset(
                                   '$basePath/icon/delete_x.svg',
-                                  color: context.appColors.iconButton,
+                                  colorFilter: ui.ColorFilter.mode(
+                                      context.appColors.iconButton, ui.BlendMode.srcIn),
                                 ),
                               ),
                             ),
