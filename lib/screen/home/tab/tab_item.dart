@@ -33,6 +33,4 @@ class TabItem {
         ),
         label: tabName);
   }
-
-  Widget firstPage(BuildContext context) => firstPageBuilder(context);
 }
