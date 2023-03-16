@@ -35,17 +35,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        final isFirstRouteInCurrentTab = !await _currentTab.navigationKey.currentState!.maybePop();
-        if (isFirstRouteInCurrentTab) {
-          if (_currentTab != TabItem.home) {
-            _changeTab(tabs.indexOf(TabItem.home));
-            return false;
-          }
-        }
-        // maybePop 가능하면 나가지 않는다.
-        return isFirstRouteInCurrentTab;
-      },
+      onWillPop: _handleBackPressed,
       child: Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
         drawer: const MenuDrawer(),
@@ -66,6 +56,18 @@ class _HomeScreenState extends State<HomeScreen>
       ),
     );
   }
+
+  Future<bool> _handleBackPressed() async {
+      final isFirstRouteInCurrentTab = !await _currentTab.navigationKey.currentState!.maybePop();
+      if (isFirstRouteInCurrentTab) {
+        if (_currentTab != TabItem.home) {
+          _changeTab(tabs.indexOf(TabItem.home));
+          return false;
+        }
+      }
+      // maybePop 가능하면 나가지 않는다.
+      return isFirstRouteInCurrentTab;
+    }
 
   BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(

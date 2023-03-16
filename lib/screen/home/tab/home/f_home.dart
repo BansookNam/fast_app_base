@@ -20,7 +20,8 @@ class HomeFragment extends StatelessWidget {
         Expanded(
           child: Tap(
               onTap: () {
-                Nav.push(const FavoriteFragment(), context: context);
+                Scaffold.of(context).openDrawer();
+                //Nav.push(const FavoriteFragment(), context: context);
               },
               child: '홈'.text.make().centered()),
         ),
