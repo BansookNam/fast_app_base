@@ -9,7 +9,7 @@ enum CustomTheme {
   dark,
   light;
 
-  static MaterialColor primarySwatchColor = Colors.yellow;
+  static MaterialColor primarySwatchColor = Colors.red;
 
   AbstractThemeColors get appColors{
     switch(this){
