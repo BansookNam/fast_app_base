@@ -13,16 +13,19 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.favorite];
+  final List<GlobalKey<NavigatorState>> navigatorKeys = [];
 
   int get _currentIndex => tabs.indexOf(_currentTab);
+
+  GlobalKey<NavigatorState> get _currentTabNavigationKey => navigatorKeys[_currentIndex];
 
   @override
   void initState() {
     super.initState();
+    initNavigatorKeys();
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -43,10 +46,10 @@ class _HomeScreenState extends State<HomeScreen>
           child: IndexedStack(
               index: _currentIndex,
               children: tabs
-                  .map((tab) => Offstage(
+                  .mapIndexed((tab, index) => Offstage(
                         offstage: _currentTab != tab,
                         child: TabNavigator(
-                          navigatorKey: tab.navigationKey,
+                          navigatorKey: navigatorKeys[index],
                           tabItem: tab,
                         ),
                       ))
@@ -58,16 +61,16 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Future<bool> _handleBackPressed() async {
-      final isFirstRouteInCurrentTab = !await _currentTab.navigationKey.currentState!.maybePop();
-      if (isFirstRouteInCurrentTab) {
-        if (_currentTab != TabItem.home) {
-          _changeTab(tabs.indexOf(TabItem.home));
-          return false;
-        }
+    final isFirstRouteInCurrentTab = (await _currentTabNavigationKey.currentState?.maybePop() == false);
+    if (isFirstRouteInCurrentTab) {
+      if (_currentTab != TabItem.home) {
+        _changeTab(tabs.indexOf(TabItem.home));
+        return false;
       }
-      // maybePop 가능하면 나가지 않는다.
-      return isFirstRouteInCurrentTab;
     }
+    // maybePop 가능하면 나가지 않는다.
+    return isFirstRouteInCurrentTab;
+  }
 
   BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
@@ -116,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen>
     });
   }
 
-  BottomNavigationBarItem bottomItem(
-      bool activate, IconData iconData, IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(bool activate, IconData iconData, IconData inActivateIconData, String label) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(label),
@@ -131,17 +133,24 @@ class _HomeScreenState extends State<HomeScreen>
     final oldTab = _currentTab;
     final targetTab = tabs[index];
     if (oldTab == targetTab) {
-      final navigationKey = _currentTab.navigationKey;
-      () async {
-        final bool canPop = navigationKey.currentState?.canPop() == true;
-        if (canPop) {
-          while (navigationKey.currentState?.canPop() == true) {
-            navigationKey.currentState!.pop();
-          }
-        }
-      }();
+      final navigationKey = _currentTabNavigationKey;
+      popAllHistory(navigationKey);
     }
-
     _changeTab(index);
+  }
+
+  void popAllHistory(GlobalKey<NavigatorState> navigationKey) {
+    final bool canPop = navigationKey.currentState?.canPop() == true;
+    if (canPop) {
+      while (navigationKey.currentState?.canPop() == true) {
+        navigationKey.currentState!.pop();
+      }
+    }
+  }
+
+  void initNavigatorKeys() {
+    for (final _ in tabs) {
+      navigatorKeys.add(GlobalKey<NavigatorState>());
+    }
   }
 }

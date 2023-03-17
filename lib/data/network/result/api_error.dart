@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../common/common.dart';
-import 'result.dart';
+import '../../simple_result.dart';
 
 class ApiError {
   int? statusCode;
@@ -18,13 +18,15 @@ class ApiError {
   static createErrorResult(e) {
     if (e is DioError) {
       if (!kReleaseMode) {
-        return Result.failure(ApiError(
-            message: e.error?.toString() ?? e.message ?? 'message is empty', isApplicationError: e.response == null));
+        return SimpleResult.failure(ApiError(
+            message: e.error?.toString() ?? e.message ?? 'message is empty',
+            isApplicationError: e.response == null));
       } else {
-        return Result.failure(ApiError(message: 'api_error'.tr(), statusCode: e.response?.statusCode));
+        return SimpleResult.failure(
+            ApiError(message: 'api_error'.tr(), statusCode: e.response?.statusCode));
       }
     }
 
-    return Result.failure(ApiError(message: 'api_error'.tr()));
+    return SimpleResult.failure(ApiError(message: 'api_error'.tr()));
   }
 }

@@ -3,7 +3,7 @@
 
 //
 // import '../../data/local/error/local_db_error.dart';
-// import '../network/result/result.dart';
+// import '../network/result/simple_result.dart';
 
 class LocalDB {
   //static late final Isar _isar;

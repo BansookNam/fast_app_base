@@ -1,27 +1,27 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/home/tab/favorite/f_favorite.dart';
+import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:flutter/material.dart';
 
 class HomeFragment extends StatelessWidget {
-  final bool isShowCloseButton;
-
   const HomeFragment({
     Key? key,
-    this.isShowCloseButton = true,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if(isShowCloseButton)const CloseButton(),
         Expanded(
-          child: Tap(
-              onTap: () {
+          child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onLongPress: () {
                 Scaffold.of(context).openDrawer();
-                //Nav.push(const FavoriteFragment(), context: context);
+              },
+              onTap: () async {
+                //Nav.push(const HomeFragment(), context: context);
+                final result = await MessageDialog(context, "안녕하세요").show();
+                debugPrint(result.toString());
               },
               child: '홈'.text.make().centered()),
         ),

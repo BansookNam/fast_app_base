@@ -1,4 +1,4 @@
-class Result<SuccessType, FailureType> {
+class SimpleResult<SuccessType, FailureType> {
   bool get isFailure => this is _Failure<SuccessType, FailureType>;
 
   bool get isSuccess => this is _Success<SuccessType, FailureType>;
@@ -27,7 +27,7 @@ class Result<SuccessType, FailureType> {
     throw const FormatException('This is not Success type');
   }
 
-  Result runIfSuccess(void Function(SuccessType data) function) {
+  SimpleResult runIfSuccess(void Function(SuccessType data) function) {
     if (isSuccess) {
       if (!_isSuccessDataExist) {
         function(null as SuccessType);
@@ -38,7 +38,7 @@ class Result<SuccessType, FailureType> {
     return this;
   }
 
-  Result runIfFailure(void Function(FailureType error) function) {
+  SimpleResult runIfFailure(void Function(FailureType error) function) {
     if (isFailure) {
       if (!_isFailureDataExist) {
         function(null as FailureType);
@@ -74,13 +74,13 @@ class Result<SuccessType, FailureType> {
   }
 }
 
-class _Success<SuccessType, FailureType> extends Result<SuccessType, FailureType> {
+class _Success<SuccessType, FailureType> extends SimpleResult<SuccessType, FailureType> {
   final SuccessType? data;
 
   _Success(this.data);
 }
 
-class _Failure<SuccessType, FailureType> extends Result<SuccessType, FailureType> {
+class _Failure<SuccessType, FailureType> extends SimpleResult<SuccessType, FailureType> {
   final FailureType? data;
 
   _Failure(this.data);
