@@ -14,6 +14,34 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
   final double appBarHeight = 60;
 
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: ListView(
+            children: [
+              Height(appBarHeight),
+              tossbankButton,
+              height5,
+              assets,
+              height5,
+              investment,
+              height5,
+              spend,
+              height5,
+              etcHorizontal,
+              height5,
+              extraButtons,
+              privacyPolicy,
+            ],
+          ),
+        ),
+        appBar,
+      ],
+    );
+  }
+
   get appBar => SizedBox(
         height: appBarHeight,
         child: Row(
@@ -39,7 +67,7 @@ class _HomeFragmentState extends State<HomeFragment> {
       );
 
   get tossbankButton => RoundContainer(
-        Row(
+        child: Row(
           children: [
             '토스뱅크'.text.bold.size(20).make(),
             emptyExpanded,
@@ -51,89 +79,98 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get investment => Container(
-        height: 100,
+  get assets => RoundContainer(
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: Text('토스투자'),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                child: Text('토스투자'),
-              ),
-            ),
+            '자산'.text.bold.size(20).make(),
+            emptyExpanded,
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            )
           ],
         ),
       );
 
-  get etcHorizontal => Container(
-        height: 100,
+  get investment => RoundContainer(
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: Text('토스투자'),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                child: Text('토스투자'),
-              ),
-            ),
+            '투자'.text.bold.size(20).make(),
+            emptyExpanded,
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            )
           ],
         ),
       );
 
-  get extraButtons => Container(
-        height: 100,
+  get spend => RoundContainer(
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: Text('토스투자'),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                child: Text('토스투자'),
-              ),
-            ),
+            '소비'.text.bold.size(20).make(),
+            emptyExpanded,
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            )
           ],
         ),
       );
 
-  get privacyPolicy => "개인정보처리방침 보기".text.makeCentered();
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: ListView(
-            children: [
-              Height(appBarHeight),
-              tossbankButton,
-              height5,
-              investment,
-              height5,
-              etcHorizontal,
-              height5,
-              extraButtons,
-              privacyPolicy,
-            ],
+  get etcHorizontal => Row(
+        children: [
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                RoundContainer(
+                  child: Row(
+                    children: [
+                      '토스뱅크'.text.bold.size(20).make(),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      )
+                    ],
+                  ),
+                ),
+                RoundContainer(
+                  child: Row(
+                    children: [
+                      '토스뱅크'.text.bold.size(20).make(),
+                      const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
+        ],
+      );
+
+  get extraButtons => RoundContainer(
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                color: Colors.blue,
+                child: Text('토스투자'),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.red,
+                child: Text('토스투자'),
+              ),
+            ),
+          ],
         ),
-        appBar,
-      ],
-    );
-  }
+      );
+
+  get privacyPolicy =>
+      "개인정보처리방침 보기".text.size(12).color(context.appColors.dimmedText).makeCentered().p(40);
 }

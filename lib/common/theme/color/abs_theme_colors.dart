@@ -34,6 +34,8 @@ abstract class AbstractThemeColors {
 
   Color get text => Colors.white;
 
+  Color get dimmedText => const Color.fromARGB(255, 171, 171, 171);
+
   Color get hintText => AppColors.grey;
 
   Color get focusedBorder => AppColors.darkGrey;

@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 
 class RoundContainer extends StatelessWidget {
   final Widget child;
+  final double? height;
 
-  const RoundContainer(this.child, {Key? key}) : super(key: key);
+  const RoundContainer({
+    required this.child,
+    this.height,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
