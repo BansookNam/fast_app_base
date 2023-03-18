@@ -1,19 +1,20 @@
-import 'package:fast_app_base/screen/home/tab/tab_item.dart';
-import 'package:fast_app_base/screen/home/tab/tab_navigator.dart';
+import 'package:fast_app_base/screen/main/tab/tab_item.dart';
+import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
+import 'package:fast_app_base/screen/main/w_bottom_gnb.dart';
 import 'package:flutter/material.dart';
 
 import '../../app.dart';
 import '../../common/common.dart';
 import 'w_menu_drawer.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   TabItem _currentTab = TabItem.home;
   final tabs = TabItem.values;
@@ -54,7 +55,12 @@ class _HomeScreenState extends State<HomeScreen>
             child: pages,
           ),
         ),
-        bottomNavigationBar: _buildBottomNavigationBar(context),
+        bottomNavigationBar: BottomGnb(
+          bottomNavigationBarBorderRadius: bottomNavigationBarBorderRadius,
+          tabs: tabs,
+          currentIndex: _currentIndex,
+          handleOnTapNavigationBarItem: _handleOnTapNavigationBarItem,
+        ),
       ),
     );
   }
@@ -84,32 +90,6 @@ class _HomeScreenState extends State<HomeScreen>
     return isFirstRouteInCurrentTab;
   }
 
-  Widget _buildBottomNavigationBar(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        boxShadow: [
-          BoxShadow(color: Colors.black26, spreadRadius: 0, blurRadius: 10),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(bottomNavigationBarBorderRadius),
-          topRight: Radius.circular(bottomNavigationBarBorderRadius),
-        ),
-        child: BottomNavigationBar(
-          items: navigationBarItems(context),
-          currentIndex: _currentIndex,
-          selectedItemColor: context.appColors.text,
-          unselectedItemColor: context.appColors.iconButtonInactivate,
-          onTap: _handleOnTapNavigationBarItem,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          type: BottomNavigationBarType.fixed,
-        ),
-      ),
-    );
-  }
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
@@ -125,17 +105,6 @@ class _HomeScreenState extends State<HomeScreen>
         break;
     }
     super.didChangeAppLifecycleState(state);
-  }
-
-  List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
-    return tabs
-        .mapIndexed(
-          (tab, index) => tab.toNavigationBarItem(
-            context,
-            isActivated: _currentIndex == index,
-          ),
-        )
-        .toList();
   }
 
   void _changeTab(int index) {

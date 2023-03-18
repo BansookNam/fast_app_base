@@ -1,9 +1,9 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/home/tab/all/f_all.dart';
-import 'package:fast_app_base/screen/home/tab/benefit/f_benefit.dart';
-import 'package:fast_app_base/screen/home/tab/home/f_home.dart';
-import 'package:fast_app_base/screen/home/tab/stock/f_stock.dart';
-import 'package:fast_app_base/screen/home/tab/tosspay/f_tosspay.dart';
+import 'package:fast_app_base/screen/main/tab/all/f_all.dart';
+import 'package:fast_app_base/screen/main/tab/benefit/f_benefit.dart';
+import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
+import 'package:fast_app_base/screen/main/tab/stock/f_stock.dart';
+import 'package:fast_app_base/screen/main/tab/tosspay/f_tosspay.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem {
