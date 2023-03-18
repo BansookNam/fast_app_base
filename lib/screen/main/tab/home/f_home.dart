@@ -1,6 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeFragment extends StatelessWidget {
   const HomeFragment({
@@ -18,9 +17,9 @@ class HomeFragment extends StatelessWidget {
                 Scaffold.of(context).openDrawer();
                 //Nav.push(const FavoriteFragment(), context: context);
               },
-              child: Text(
-                'This is Google Fonts',
-                style: GoogleFonts.aclonica(fontSize: 30),
+              child: const Text(
+                '안녕하세요.',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
               ).centered()),
         ),
       ],
