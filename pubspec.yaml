@@ -110,6 +110,7 @@ flutter:
     - assets/image/benefit/
     - assets/image/darkmode/
     - assets/image/bank/
+    - assets/image/stock/
     - assets/image/credit_card/
     - assets/image/illustration/
     - assets/translations/
