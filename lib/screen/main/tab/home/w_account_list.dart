@@ -18,10 +18,7 @@ class _AccountListState extends State<AccountList> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         height20,
-        AccountItem(myAccounts[0]),
-        AccountItem(myAccounts[1]),
-        AccountItem(myAccounts[2]),
-        AccountItem(myAccounts[3]),
+        ...myAccounts.map((e) => AccountItem(e)).toList(),
       ],
     );
   }
