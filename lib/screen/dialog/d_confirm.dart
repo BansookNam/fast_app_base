@@ -1,4 +1,4 @@
-import 'package:fast_app_base/data/simple_result.dart';
+import 'package:fast_app_base/common/simple_result.dart';
 import 'package:flutter/material.dart';
 import 'package:nav/dialog/dialog.dart';
 
