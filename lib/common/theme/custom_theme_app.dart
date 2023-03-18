@@ -48,10 +48,8 @@ class _CustomThemeAppState extends State<CustomThemeApp> {
   void _initSystemTheme() {
     switch (ThemeUtil.systemBrightness) {
       case Brightness.dark:
-        theme = CustomTheme.dark;
-        break;
       case Brightness.light:
-        theme = CustomTheme.light;
+        theme = CustomTheme.dark;
         break;
     }
   }

@@ -3,6 +3,7 @@ import 'package:fast_app_base/common/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../../screen/dialog/d_message.dart';
 import '../common.dart';
 
 class ThemeUtil {
@@ -15,14 +16,6 @@ class ThemeUtil {
   }
 
   static void toggleTheme(BuildContext context) {
-    final theme = context.themeType;
-    switch (theme) {
-      case CustomTheme.dark:
-        changeTheme(context, CustomTheme.light);
-        break;
-      case CustomTheme.light:
-        changeTheme(context, CustomTheme.dark);
-        break;
-    }
+    MessageDialog('현재 dark모드만 지원합니다.').show();
   }
 }

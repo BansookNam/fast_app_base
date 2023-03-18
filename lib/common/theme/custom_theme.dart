@@ -1,14 +1,11 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/theme/color/dark_app_colors.dart';
-import 'package:fast_app_base/common/theme/color/light_app_colors.dart';
 import 'package:fast_app_base/common/theme/shadows/dart_app_shadows.dart';
-import 'package:fast_app_base/common/theme/shadows/light_app_shadows.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 enum CustomTheme {
-  dark,
-  light;
+  dark;
 
   static MaterialColor primarySwatchColor = Colors.lightBlue;
 
@@ -16,8 +13,6 @@ enum CustomTheme {
     switch (this) {
       case CustomTheme.dark:
         return DarkAppColors();
-      case CustomTheme.light:
-        return LightAppColors();
     }
   }
 
@@ -25,8 +20,6 @@ enum CustomTheme {
     switch (this) {
       case CustomTheme.dark:
         return DarkAppShadows();
-      case CustomTheme.light:
-        return LightAppShadows();
     }
   }
 
@@ -34,19 +27,8 @@ enum CustomTheme {
     switch (this) {
       case CustomTheme.dark:
         return darkTheme;
-      case CustomTheme.light:
-        return lightTheme;
     }
   }
-
-  static ThemeData lightTheme = ThemeData(
-      primarySwatch: primarySwatchColor,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      brightness: Brightness.light,
-      textTheme: GoogleFonts.notoSansTextTheme(
-        ThemeData(brightness: Brightness.light).textTheme,
-      ),
-      colorScheme: const ColorScheme.light(background: Colors.white));
 
   static ThemeData darkTheme = ThemeData(
       primarySwatch: primarySwatchColor,
