@@ -8,12 +8,10 @@ class BenefitFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
+      padding: const EdgeInsets.all(20),
       children: [
-        Expanded(
-          child: Tap(onTap: () {}, child: '혜택'.text.make().centered()),
-        ),
+        '혜택'.text.size(20).bold.make(),
       ],
     );
   }
