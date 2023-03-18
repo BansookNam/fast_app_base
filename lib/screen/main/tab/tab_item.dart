@@ -1,6 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/screen/home/tab/favorite/f_favorite.dart';
-import 'package:fast_app_base/screen/home/tab/home/f_home.dart';
+import 'package:fast_app_base/screen/main/tab/favorite/f_favorite.dart';
+import 'package:fast_app_base/screen/main/tab/home/f_home.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem {
