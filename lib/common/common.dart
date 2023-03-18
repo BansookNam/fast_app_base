@@ -10,6 +10,7 @@ export '../common/dart/kotlin_style/kotlin_extension.dart';
 export '../common/extension/animation_controller_extension.dart';
 export '../common/extension/context_extension.dart';
 export '../common/extension/num_duration_extension.dart';
+export '../common/extension/num_extension.dart';
 export '../common/extension/velocityx_extension.dart';
 export 'constants.dart';
 export 'util/async.dart';

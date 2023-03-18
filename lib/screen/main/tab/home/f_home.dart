@@ -45,7 +45,8 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   get appBar => TossAppBar(appBarHeight: appBarHeight);
 
-  get tossbankButton => RoundContainer(
+  get tossbankButton =>
+      RoundContainer(
         child: Row(
           children: [
             '토스뱅크'.text.bold.size(20).make(),
@@ -58,16 +59,24 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get assets => RoundContainer(
-        child: Row(
+  get assets =>
+      RoundContainer(
+        child: Column(
           children: [
-            '자산'.text.bold.size(15).make(),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                '자산'.text.bold.size(15).make(),
+
+              ],
+            ),
             const AccountList(),
           ],
         ),
       );
 
-  get investment => RoundContainer(
+  get investment =>
+      RoundContainer(
         child: Row(
           children: [
             '투자'.text.bold.size(20).make(),
@@ -80,7 +89,8 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get spend => RoundContainer(
+  get spend =>
+      RoundContainer(
         child: Row(
           children: [
             '소비'.text.bold.size(20).make(),
@@ -93,7 +103,8 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get etcHorizontal => SizedBox(
+  get etcHorizontal =>
+      SizedBox(
         height: 150,
         child: ListView(
           scrollDirection: Axis.horizontal,
@@ -129,7 +140,8 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get extraButtons => Row(
+  get extraButtons =>
+      Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RoundContainer(child: '화면설정'.text.make()),

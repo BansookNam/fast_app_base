@@ -1,4 +1,8 @@
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
+
+import 'dummy_bank_account_list.dart';
+import 'w_account_item.dart';
 
 class AccountList extends StatefulWidget {
   const AccountList({Key? key}) : super(key: key);
@@ -10,6 +14,15 @@ class AccountList extends StatefulWidget {
 class _AccountListState extends State<AccountList> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        height20,
+        AccountItem(myAccounts[0]),
+        AccountItem(myAccounts[1]),
+        AccountItem(myAccounts[2]),
+        AccountItem(myAccounts[3]),
+      ],
+    );
   }
 }
