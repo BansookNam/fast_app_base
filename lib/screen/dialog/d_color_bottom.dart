@@ -4,30 +4,35 @@ import 'package:nav/bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../common/common.dart';
 
-class GreenBottomSheet extends ModalBottomSheet<SimpleResult> {
+class ColorBottomSheet extends ModalBottomSheet<SimpleResult> {
   final String message;
+  final Color textColor;
 
-  GreenBottomSheet(
+  ColorBottomSheet(
     this.message, {
+    Color? textColor,
     super.context,
     super.key,
     super.backgroundColor = Colors.purple,
     super.handleColor = Colors.red,
     super.barrierColor = const Color(0x80000000),
-  });
+  }) : textColor = textColor ?? Colors.white;
 
   @override
   Widget build(BuildContext context) {
     return Tap(
       onTap: () => hide(SimpleResult()),
-      child: Container(
+      child: SizedBox(
         height: 230,
         width: double.infinity,
-        color: Colors.green,
         child: Center(
           child: Text(
             message,
-            style: const TextStyle(fontSize: 30, color: Colors.white),
+            style: TextStyle(
+              fontSize: 30,
+              color: textColor,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

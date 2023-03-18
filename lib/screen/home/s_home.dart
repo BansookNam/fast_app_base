@@ -13,7 +13,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.favorite];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
@@ -21,6 +22,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   int get _currentIndex => tabs.indexOf(_currentTab);
 
   GlobalKey<NavigatorState> get _currentTabNavigationKey => navigatorKeys[_currentIndex];
+
+  bool get extendBody => true;
+
+  double get bottomNavigationBarBorderRadius => 30.0;
 
   @override
   void initState() {
@@ -40,28 +45,35 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     return WillPopScope(
       onWillPop: _handleBackPressed,
       child: Scaffold(
-        backgroundColor: Theme.of(context).canvasColor,
+        extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
         drawer: const MenuDrawer(),
-        body: SafeArea(
-          child: IndexedStack(
-              index: _currentIndex,
-              children: tabs
-                  .mapIndexed((tab, index) => Offstage(
-                        offstage: _currentTab != tab,
-                        child: TabNavigator(
-                          navigatorKey: navigatorKeys[index],
-                          tabItem: tab,
-                        ),
-                      ))
-                  .toList()),
+        body: Padding(
+          padding: EdgeInsets.only(bottom: extendBody ? 60 - bottomNavigationBarBorderRadius : 0),
+          child: SafeArea(
+            bottom: !extendBody,
+            child: pages,
+          ),
         ),
         bottomNavigationBar: _buildBottomNavigationBar(context),
       ),
     );
   }
 
+  IndexedStack get pages => IndexedStack(
+      index: _currentIndex,
+      children: tabs
+          .mapIndexed((tab, index) => Offstage(
+                offstage: _currentTab != tab,
+                child: TabNavigator(
+                  navigatorKey: navigatorKeys[index],
+                  tabItem: tab,
+                ),
+              ))
+          .toList());
+
   Future<bool> _handleBackPressed() async {
-    final isFirstRouteInCurrentTab = (await _currentTabNavigationKey.currentState?.maybePop() == false);
+    final isFirstRouteInCurrentTab =
+        (await _currentTabNavigationKey.currentState?.maybePop() == false);
     if (isFirstRouteInCurrentTab) {
       if (_currentTab != TabItem.home) {
         _changeTab(tabs.indexOf(TabItem.home));
@@ -72,16 +84,29 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     return isFirstRouteInCurrentTab;
   }
 
-  BottomNavigationBar _buildBottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      items: navigationBarItems(context),
-      currentIndex: _currentIndex,
-      selectedItemColor: context.appColors.text,
-      unselectedItemColor: context.appColors.iconButtonInactivate,
-      onTap: _handleOnTapNavigationBarItem,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      type: BottomNavigationBarType.fixed,
+  Widget _buildBottomNavigationBar(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(color: Colors.black26, spreadRadius: 0, blurRadius: 10),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(bottomNavigationBarBorderRadius),
+          topRight: Radius.circular(bottomNavigationBarBorderRadius),
+        ),
+        child: BottomNavigationBar(
+          items: navigationBarItems(context),
+          currentIndex: _currentIndex,
+          selectedItemColor: context.appColors.text,
+          unselectedItemColor: context.appColors.iconButtonInactivate,
+          onTap: _handleOnTapNavigationBarItem,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
+        ),
+      ),
     );
   }
 
@@ -119,7 +144,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     });
   }
 
-  BottomNavigationBarItem bottomItem(bool activate, IconData iconData, IconData inActivateIconData, String label) {
+  BottomNavigationBarItem bottomItem(
+      bool activate, IconData iconData, IconData inActivateIconData, String label) {
     return BottomNavigationBarItem(
         icon: Icon(
           key: ValueKey(label),
