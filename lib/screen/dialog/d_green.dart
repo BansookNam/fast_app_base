@@ -5,7 +5,10 @@ import 'package:nav/bottom_sheet/modal_bottom_sheet.dart';
 import '../../common/common.dart';
 
 class GreenBottomSheet extends ModalBottomSheet<SimpleResult> {
-  GreenBottomSheet({
+  final String message;
+
+  GreenBottomSheet(
+    this.message, {
     super.context,
     super.key,
     super.backgroundColor = Colors.purple,
@@ -19,7 +22,14 @@ class GreenBottomSheet extends ModalBottomSheet<SimpleResult> {
       onTap: () => hide(SimpleResult()),
       child: Container(
         height: 230,
+        width: double.infinity,
         color: Colors.green,
+        child: Center(
+          child: Text(
+            message,
+            style: const TextStyle(fontSize: 30, color: Colors.white),
+          ),
+        ),
       ),
     );
   }

@@ -1,7 +1,8 @@
 {
-    "opensource": "오픈소스",
-    "clear_cache": "캐시 지우기",
-    "clear_cache_done": "캐시가 삭제되었습니다.",
-    "close": "닫기",
-    "done": "완료"
+  "opensource": "오픈소스",
+  "clear_cache": "캐시 지우기",
+  "clear_cache_done": "캐시가 삭제되었습니다.",
+  "close": "닫기",
+  "done": "완료",
+  "cancel": "취소"
 }
