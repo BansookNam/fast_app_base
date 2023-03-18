@@ -11,13 +11,13 @@ class HomeFragment extends StatelessWidget {
     return ListView(
       children: [
         appBar,
-        const Height(4),
+        height4,
         tossbankButton,
-        const Height(4),
+        height4,
         investment,
-        const Height(4),
+        height4,
         etcHorizontal,
-        const Height(10),
+        height4,
         extraButtons,
         privacyPolicy,
       ],

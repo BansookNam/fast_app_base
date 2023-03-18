@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const height4 = Height(4);
+const height10 = Height(10);
+
 class Height extends StatelessWidget {
   final double height;
 
