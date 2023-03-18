@@ -138,5 +138,5 @@ class _HomeFragmentState extends State<HomeFragment> {
       );
 
   get privacyPolicy =>
-      "개인정보처리방침 보기".text.size(12).color(context.appColors.dimmedText).makeCentered().p(40);
+      '개인정보처리방침 보기'.text.size(12).color(context.appColors.dimmedText).makeCentered().p(40);
 }
