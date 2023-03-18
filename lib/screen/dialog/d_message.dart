@@ -32,7 +32,6 @@ class _MessageDialogState extends DialogState<MessageDialog> {
 
   @override
   Widget build(BuildContext context) {
-    const radius = Radius.circular(14);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -40,57 +39,56 @@ class _MessageDialogState extends DialogState<MessageDialog> {
           Expanded(
             child: Container(),
           ),
-          Container(
-              constraints: const BoxConstraints(maxHeight: 500),
-              decoration: BoxDecoration(
-                  color: context.appColors.drawerBg,
-                  borderRadius: const BorderRadius.only(topLeft: radius, topRight: radius)),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        widget.message!,
-                        style: TextStyle(
-                            fontSize: widget.fontSize, height: 1.8, color: context.appColors.text),
-                        textAlign: widget.textAlign,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  )
-                ],
-              )),
-          Line(color: context.appColors.divider),
-          Row(
-            children: <Widget>[
-              Expanded(
-                child: Tap(
-                  onTap: () {
-                    widget.hide(SimpleResult.success());
-                  },
-                  child: Container(
-                      alignment: Alignment.center,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: context.appColors.drawerBg,
-                          borderRadius:
-                              const BorderRadius.only(bottomLeft: radius, bottomRight: radius)),
-                      child: Text(
-                        widget.buttonText ?? 'close'.tr(),
-                        style: TextStyle(
-                          color: context.appColors.confirmText,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
+          Material(
+            color: Colors.transparent,
+            child: Container(
+                constraints: BoxConstraints(maxHeight: context.deviceHeight),
+                decoration: BoxDecoration(
+                    color: context.appColors.drawerBg, borderRadius: BorderRadius.circular(15)),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Text(
+                              widget.message!,
+                              style: TextStyle(
+                                  fontSize: widget.fontSize,
+                                  height: 1.8,
+                                  color: context.appColors.text),
+                              textAlign: widget.textAlign,
+                            ),
+                          ),
                         ),
-                      )),
-                ),
-              )
-            ],
+                        const SizedBox(
+                          height: 4,
+                        )
+                      ],
+                    ),
+                    Line(color: context.appColors.divider),
+                    Tap(
+                      onTap: () {
+                        widget.hide(SimpleResult.success());
+                      },
+                      child: Container(
+                          height: 50,
+                          alignment: Alignment.center,
+                          child: Text(
+                            widget.buttonText ?? 'close'.tr(),
+                            style: TextStyle(
+                              color: context.appColors.confirmText,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          )),
+                    )
+                  ],
+                )),
           ),
           Expanded(
             child: Container(),
