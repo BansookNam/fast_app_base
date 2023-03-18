@@ -2,12 +2,17 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/w_empty_expanded.dart';
 import 'package:flutter/material.dart';
 
-class HomeFragment extends StatelessWidget {
-  final double appBarHeight = 60;
-
+class HomeFragment extends StatefulWidget {
   const HomeFragment({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<HomeFragment> createState() => _HomeFragmentState();
+}
+
+class _HomeFragmentState extends State<HomeFragment> {
+  final double appBarHeight = 60;
 
   get appBar => SizedBox(
         height: appBarHeight,
