@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_account_list.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_toss_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -61,6 +62,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         child: Row(
           children: [
             '자산'.text.bold.size(15).make(),
+            const AccountList(),
           ],
         ),
       );
