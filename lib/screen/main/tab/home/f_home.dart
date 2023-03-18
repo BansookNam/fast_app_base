@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/widget/w_empty_expanded.dart';
 import 'package:flutter/material.dart';
 
 class HomeFragment extends StatelessWidget {
@@ -8,26 +9,31 @@ class HomeFragment extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  get appBar =>
-      SizedBox(
+  get appBar => SizedBox(
         height: appBarHeight,
-        child: AppBar(
-          title: Text('토스'),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {},
+        child: Row(
+          children: [
+            width5,
+            Image.asset(
+              '$basePath/icon/toss.png',
+              height: 30,
             ),
-            IconButton(
-              icon: Icon(Icons.notifications),
-              onPressed: () {},
+            emptyExpanded,
+            Image.asset(
+              '$basePath/icon/map_point.png',
+              height: 30,
             ),
+            width10,
+            Image.asset(
+              '$basePath/icon/notification.png',
+              height: 30,
+            ),
+            width10,
           ],
         ),
       );
 
-  get tossbankButton =>
-      Container(
+  get tossbankButton => Container(
         child: Row(
           children: [
             Expanded(
@@ -47,8 +53,7 @@ class HomeFragment extends StatelessWidget {
         ),
       );
 
-  get investment =>
-      Container(
+  get investment => Container(
         height: 100,
         child: Row(
           children: [
@@ -68,8 +73,7 @@ class HomeFragment extends StatelessWidget {
         ),
       );
 
-  get etcHorizontal =>
-      Container(
+  get etcHorizontal => Container(
         height: 100,
         child: Row(
           children: [
@@ -89,8 +93,7 @@ class HomeFragment extends StatelessWidget {
         ),
       );
 
-  get extraButtons =>
-      Container(
+  get extraButtons => Container(
         height: 100,
         child: Row(
           children: [
@@ -121,11 +124,11 @@ class HomeFragment extends StatelessWidget {
             children: [
               Height(appBarHeight),
               tossbankButton,
-              height4,
+              height5,
               investment,
-              height4,
+              height5,
               etcHorizontal,
-              height4,
+              height5,
               extraButtons,
               privacyPolicy,
             ],
