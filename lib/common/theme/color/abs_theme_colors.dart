@@ -45,4 +45,6 @@ abstract class AbstractThemeColors {
   Color get focusedBorder => AppColors.darkGrey;
 
   Color get confirmText => AppColors.brightBlue;
+
+  Color get blueTitleText => AppColors.blue;
 }
