@@ -36,19 +36,12 @@ class HomeFragment extends StatelessWidget {
   get tossbankButton => Container(
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                height: 300,
-                color: Colors.blue,
-                child: Text('토스뱅크'),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                child: Text('토스뱅크'),
-              ),
-            ),
+            '토스뱅크'.text.size(20).make(),
+            emptyExpanded,
+            const Icon(
+              Icons.arrow_forward_ios,
+              size: 15,
+            )
           ],
         ),
       );
