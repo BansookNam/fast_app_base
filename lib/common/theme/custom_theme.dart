@@ -42,13 +42,17 @@ enum CustomTheme {
       primarySwatch: primarySwatchColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.light,
-      //textTheme: GoogleFonts.singleDayTextTheme(),
+      // textTheme: GoogleFonts.singleDayTextTheme(
+      //   ThemeData(brightness: Brightness.light).textTheme,
+      // ),
       colorScheme: const ColorScheme.light(background: Colors.white));
 
   static ThemeData darkTheme = ThemeData(
       primarySwatch: primarySwatchColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.dark,
-      //textTheme: GoogleFonts.nanumMyeongjoTextTheme(),
+      // textTheme: GoogleFonts.nanumMyeongjoTextTheme(
+      //   ThemeData(brightness: Brightness.dark).textTheme,
+      // ),
       colorScheme: const ColorScheme.dark(background: AppColors.darkGrey));
 }

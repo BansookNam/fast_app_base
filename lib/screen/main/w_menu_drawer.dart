@@ -47,7 +47,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                  color: Theme.of(context).colorScheme.background),
+                  color: context.colors.background),
               child: isSmallScreen(context)
                   ? SingleChildScrollView(
                       child: getMenus(context),
@@ -247,12 +247,12 @@ class _MenuWidget extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15, right: 20),
           child: Row(
             children: [
-              Expanded(child: text.text.textStyle(defaultFontStyle()).size(15).make()),
-              // SvgPicture.asset(
-              //   '$basePath/common/small_arrow_right.svg',
-              //   width: 17,
-              //   height: 17,
-              // )
+              Expanded(
+                  child: text.text
+                      .textStyle(defaultFontStyle())
+                      .color(context.appColors.drawerText)
+                      .size(15)
+                      .make()),
             ],
           ),
         ),
