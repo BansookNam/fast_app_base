@@ -1,8 +1,8 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 
-class HomeFragment extends StatelessWidget {
-  const HomeFragment({
+class BenefitFragment extends StatelessWidget {
+  const BenefitFragment({
     Key? key,
   }) : super(key: key);
 
@@ -12,12 +12,7 @@ class HomeFragment extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Tap(
-              onTap: () {
-                Scaffold.of(context).openDrawer();
-                //Nav.push(const FavoriteFragment(), context: context);
-              },
-              child: '홈'.text.make().centered()),
+          child: Tap(onTap: () {}, child: '혜택'.text.make().centered()),
         ),
       ],
     );

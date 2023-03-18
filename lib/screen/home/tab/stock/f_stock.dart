@@ -1,8 +1,8 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 
-class HomeFragment extends StatelessWidget {
-  const HomeFragment({
+class StockFragment extends StatelessWidget {
+  const StockFragment({
     Key? key,
   }) : super(key: key);
 
@@ -17,7 +17,7 @@ class HomeFragment extends StatelessWidget {
                 Scaffold.of(context).openDrawer();
                 //Nav.push(const FavoriteFragment(), context: context);
               },
-              child: '홈'.text.make().centered()),
+              child: '주식'.text.make().centered()),
         ),
       ],
     );
