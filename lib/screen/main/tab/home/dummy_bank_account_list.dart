@@ -2,10 +2,10 @@ import 'package:fast_app_base/data/vo/vo_bank_account.dart';
 import 'package:fast_app_base/screen/main/tab/home/dummy_bank_list.dart';
 
 final myAccounts = <BankAccount>[
+  bankAccountToss1,
   bankAccountShinhan1,
   bankAccountShinhan2,
   bankAccountKakao1,
-  bankAccountToss1,
 ];
 
 final bankAccountShinhan1 = BankAccount(
