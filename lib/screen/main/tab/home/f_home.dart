@@ -21,7 +21,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         Positioned.fill(
           child: ListView(
             children: [
-              Height(appBarHeight),
+              Height(appBarHeight + 10),
               tossbankButton,
               height5,
               assets,
@@ -42,26 +42,35 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
-  get appBar => SizedBox(
-        height: appBarHeight,
-        child: Row(
+  get appBar => Container(
+        color: context.appColors.appbarBackground,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            width5,
-            Image.asset(
-              '$basePath/icon/toss.png',
-              height: 30,
+            SizedBox(
+              height: appBarHeight,
+              child: Row(
+                children: [
+                  width5,
+                  Image.asset(
+                    '$basePath/icon/toss.png',
+                    height: 30,
+                  ),
+                  emptyExpanded,
+                  Image.asset(
+                    '$basePath/icon/map_point.png',
+                    height: 30,
+                  ),
+                  width10,
+                  Image.asset(
+                    '$basePath/icon/notification.png',
+                    height: 30,
+                  ),
+                  width10,
+                ],
+              ),
             ),
-            emptyExpanded,
-            Image.asset(
-              '$basePath/icon/map_point.png',
-              height: 30,
-            ),
-            width10,
-            Image.asset(
-              '$basePath/icon/notification.png',
-              height: 30,
-            ),
-            width10,
+            const Line(),
           ],
         ),
       );

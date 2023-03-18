@@ -8,6 +8,8 @@ typedef ColorProvider = Color Function();
 abstract class AbstractThemeColors {
   Color get background => const Color.fromARGB(255, 16, 16, 16);
 
+  Color get appbarBackground => const Color.fromARGB(255, 16, 16, 18);
+
   Color get layerBackground => const Color.fromARGB(255, 24, 23, 28);
 
   Color get buttonBackground => const Color.fromARGB(255, 44, 44, 52);
@@ -30,7 +32,7 @@ abstract class AbstractThemeColors {
 
   Color get badgeBg => AppColors.darkOrange;
 
-  Color get divider => const Color.fromARGB(255, 93, 93, 93);
+  Color get divider => const Color.fromARGB(255, 34, 34, 40);
 
   Color get text => Colors.white;
 
