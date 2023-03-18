@@ -1,5 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/widget/w_empty_expanded.dart';
+import 'package:fast_app_base/screen/main/tab/home/w_toss_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomeFragment extends StatefulWidget {
@@ -42,38 +42,7 @@ class _HomeFragmentState extends State<HomeFragment> {
     );
   }
 
-  get appBar => Container(
-        color: context.appColors.appbarBackground,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: appBarHeight,
-              child: Row(
-                children: [
-                  width5,
-                  Image.asset(
-                    '$basePath/icon/toss.png',
-                    height: 30,
-                  ),
-                  emptyExpanded,
-                  Image.asset(
-                    '$basePath/icon/map_point.png',
-                    height: 30,
-                  ),
-                  width10,
-                  Image.asset(
-                    '$basePath/icon/notification.png',
-                    height: 30,
-                  ),
-                  width10,
-                ],
-              ),
-            ),
-            const Line(),
-          ],
-        ),
-      );
+  get appBar => TossAppBar(appBarHeight: appBarHeight);
 
   get tossbankButton => RoundContainer(
         child: Row(
@@ -91,12 +60,7 @@ class _HomeFragmentState extends State<HomeFragment> {
   get assets => RoundContainer(
         child: Row(
           children: [
-            '자산'.text.bold.size(20).make(),
-            emptyExpanded,
-            const Icon(
-              Icons.arrow_forward_ios,
-              size: 15,
-            )
+            '자산'.text.bold.size(15).make(),
           ],
         ),
       );

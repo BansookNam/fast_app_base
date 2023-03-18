@@ -13,6 +13,7 @@ export '../common/extension/num_duration_extension.dart';
 export '../common/extension/velocityx_extension.dart';
 export 'constants.dart';
 export 'util/async.dart';
+export 'widget/w_empty_expanded.dart';
 export 'widget/w_height_and_width.dart';
 export 'widget/w_line.dart';
 export 'widget/w_round_container.dart';
