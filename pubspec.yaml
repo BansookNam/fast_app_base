@@ -107,6 +107,7 @@ flutter:
     - assets/image/
     - assets/image/icon/
     - assets/image/flag/
+    - assets/image/benefit/
     - assets/image/darkmode/
     - assets/image/bank/
     - assets/image/credit_card/
