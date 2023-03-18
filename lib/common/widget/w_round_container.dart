@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class RoundContainer extends StatelessWidget {
   final Widget child;
   final double? height;
+  final double sideMargin;
 
   const RoundContainer({
     required this.child,
     this.height,
+    this.sideMargin = 15,
     Key? key,
   }) : super(key: key);
 
@@ -15,7 +17,7 @@ class RoundContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(horizontal: sideMargin),
       decoration: BoxDecoration(
         color: context.appColors.layerBackground,
         borderRadius: BorderRadius.circular(15),

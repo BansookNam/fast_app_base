@@ -118,57 +118,48 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get etcHorizontal => Row(
-        children: [
-          Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                RoundContainer(
-                  child: Row(
-                    children: [
-                      '토스뱅크'.text.bold.size(20).make(),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                      )
-                    ],
-                  ),
-                ),
-                RoundContainer(
-                  child: Row(
-                    children: [
-                      '토스뱅크'.text.bold.size(20).make(),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      );
-
-  get extraButtons => RoundContainer(
-        child: Row(
+  get etcHorizontal => SizedBox(
+        height: 150,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           children: [
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: Text('토스투자'),
+            RoundContainer(
+              height: 150,
+              sideMargin: 5,
+              child: Row(
+                children: [
+                  '토스뱅크'.text.bold.size(20).make(),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 15,
+                  )
+                ],
               ),
             ),
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                child: Text('토스투자'),
+            RoundContainer(
+              height: 150,
+              sideMargin: 5,
+              child: Row(
+                children: [
+                  '토스뱅크'.text.bold.size(20).make(),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 15,
+                  )
+                ],
               ),
             ),
           ],
         ),
+      );
+
+  get extraButtons => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          RoundContainer(child: '화면설정'.text.make()),
+          RoundContainer(child: '자산 추가'.text.make()),
+        ],
       );
 
   get privacyPolicy =>
