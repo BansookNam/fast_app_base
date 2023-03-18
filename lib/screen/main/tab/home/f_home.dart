@@ -38,12 +38,8 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get tossbankButton => Container(
-        padding: const EdgeInsets.all(20),
-        margin: const EdgeInsets.symmetric(horizontal: 15),
-        decoration: BoxDecoration(
-            color: context.appColors.layerBackground, borderRadius: BorderRadius.circular(15)),
-        child: Row(
+  get tossbankButton => RoundContainer(
+        Row(
           children: [
             '토스뱅크'.text.bold.size(20).make(),
             emptyExpanded,
