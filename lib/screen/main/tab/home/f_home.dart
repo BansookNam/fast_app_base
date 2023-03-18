@@ -39,9 +39,13 @@ class _HomeFragmentState extends State<HomeFragment> {
       );
 
   get tossbankButton => Container(
+        padding: const EdgeInsets.all(20),
+        margin: const EdgeInsets.symmetric(horizontal: 15),
+        decoration: BoxDecoration(
+            color: context.appColors.layerBackground, borderRadius: BorderRadius.circular(15)),
         child: Row(
           children: [
-            '토스뱅크'.text.size(20).make(),
+            '토스뱅크'.text.bold.size(20).make(),
             emptyExpanded,
             const Icon(
               Icons.arrow_forward_ios,
