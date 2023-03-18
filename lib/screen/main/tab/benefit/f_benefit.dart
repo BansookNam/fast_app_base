@@ -15,17 +15,12 @@ class BenefitFragment extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        '혜택'.text
-            .size(23)
-            .bold
-            .make(),
+        '혜택'.text.size(23).bold.make(),
         const PointWidget(),
-        '혜택 더 받기'.text
-            .size(20)
-            .bold
-            .make(),
+        height20,
+        '혜택 더 받기'.text.size(20).bold.make(),
+        height20,
         ...benefitMenus.map((e) => BenefitItem(menu: e)).toList(),
-
       ],
     );
   }
