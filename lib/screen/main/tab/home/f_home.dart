@@ -8,20 +8,18 @@ class HomeFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView(
       children: [
-        Expanded(
-          child: Tap(
-              onTap: () {
-                Scaffold.of(context).openDrawer();
-                //Nav.push(const FavoriteFragment(), context: context);
-              },
-              child: const Text(
-                '안녕하세요.',
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
-              ).centered()),
-        ),
+        appBar,
+        const Height(4),
+        tossbankButton,
+        const Height(4),
+        investment,
+        const Height(4),
+        etcHorizontal,
+        const Height(10),
+        extraButtons,
+        privacyPolicy,
       ],
     );
   }
