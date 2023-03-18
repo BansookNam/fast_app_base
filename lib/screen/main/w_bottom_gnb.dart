@@ -30,6 +30,7 @@ class BottomGnb extends StatelessWidget {
           topRight: Radius.circular(bottomNavigationBarBorderRadius),
         ),
         child: BottomNavigationBar(
+          backgroundColor: context.appColors.layerBackground,
           items: navigationBarItems(context),
           currentIndex: currentIndex,
           selectedItemColor: context.appColors.text,

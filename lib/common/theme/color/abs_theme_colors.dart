@@ -6,6 +6,12 @@ export 'package:fast_app_base/common/constant/app_colors.dart';
 typedef ColorProvider = Color Function();
 
 abstract class AbstractThemeColors {
+  Color get background => const Color.fromARGB(255, 16, 16, 16);
+
+  Color get layerBackground => const Color.fromARGB(255, 24, 23, 28);
+
+  Color get buttonBackground => const Color.fromARGB(255, 44, 44, 52);
+
   Color get veryBrightGrey => AppColors.brightGrey;
 
   Color get textBadgeText => Colors.white;
