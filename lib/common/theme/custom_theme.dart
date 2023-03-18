@@ -11,8 +11,8 @@ enum CustomTheme {
 
   static MaterialColor primarySwatchColor = Colors.lightBlue;
 
-  AbstractThemeColors get appColors{
-    switch(this){
+  AbstractThemeColors get appColors {
+    switch (this) {
       case CustomTheme.dark:
         return DarkAppColors();
       case CustomTheme.light:
@@ -21,7 +21,7 @@ enum CustomTheme {
   }
 
   AbsThemeShadows get appShadows {
-    switch(this){
+    switch (this) {
       case CustomTheme.dark:
         return DarkAppShadows();
       case CustomTheme.light:
@@ -29,8 +29,8 @@ enum CustomTheme {
     }
   }
 
-  ThemeData get themeData{
-    switch(this){
+  ThemeData get themeData {
+    switch (this) {
       case CustomTheme.dark:
         return darkTheme;
       case CustomTheme.light:
@@ -42,11 +42,13 @@ enum CustomTheme {
       primarySwatch: primarySwatchColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.light,
+      //textTheme: GoogleFonts.singleDayTextTheme(),
       colorScheme: const ColorScheme.light(background: Colors.white));
 
   static ThemeData darkTheme = ThemeData(
       primarySwatch: primarySwatchColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.dark,
+      //textTheme: GoogleFonts.nanumMyeongjoTextTheme(),
       colorScheme: const ColorScheme.dark(background: AppColors.darkGrey));
 }
