@@ -92,7 +92,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           _MenuWidget(
             'opensource'.tr(),
             onTap: () async {
-              MessageDialog(context, 'opensource'.tr()).show();
+              MessageDialog('opensource'.tr()).show();
             },
           ),
           const Line(),
@@ -102,7 +102,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               final manager = DefaultCacheManager();
               await manager.emptyCache();
               if (mounted) {
-                MessageDialog(context, 'clear_cache_done'.tr()).show();
+                MessageDialog('clear_cache_done'.tr()).show();
               }
             },
           ),

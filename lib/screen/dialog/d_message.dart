@@ -12,14 +12,14 @@ class MessageDialog extends DialogWidget<SimpleResult> {
   final double fontSize;
 
   MessageDialog(
-    BuildContext context,
     this.message, {
+    super.context,
     super.key,
     this.buttonText,
     this.fontSize = 14,
     this.cancelable = true,
     this.textAlign = TextAlign.start,
-  }) : super(context);
+  });
 
   @override
   State<StatefulWidget> createState() {
