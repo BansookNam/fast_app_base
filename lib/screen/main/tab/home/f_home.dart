@@ -19,23 +19,29 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned.fill(
-          child: ListView(
-            children: [
-              Height(appBarHeight + 10),
-              tossbankButton,
-              height5,
-              assets,
-              height5,
-              investment,
-              height5,
-              spend,
-              height5,
-              etcHorizontal,
-              height5,
-              extraButtons,
-              privacyPolicy,
-            ],
+        Container(
+          margin: EdgeInsets.only(top: appBarHeight),
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await sleepAsync(1000); //서버가 하는 작업 추가
+            },
+            child: ListView(
+              children: [
+                height10,
+                tossbankButton,
+                height5,
+                assets,
+                height5,
+                investment,
+                height5,
+                spend,
+                height5,
+                etcHorizontal,
+                height5,
+                extraButtons,
+                privacyPolicy,
+              ],
+            ),
           ),
         ),
         appBar,
@@ -45,8 +51,7 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   get appBar => TossAppBar(appBarHeight: appBarHeight);
 
-  get tossbankButton =>
-      RoundContainer(
+  get tossbankButton => RoundContainer(
         child: Row(
           children: [
             '토스뱅크'.text.bold.size(20).make(),
@@ -59,15 +64,13 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get assets =>
-      RoundContainer(
+  get assets => RoundContainer(
         child: Column(
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 '자산'.text.bold.size(15).make(),
-
               ],
             ),
             const AccountList(),
@@ -75,8 +78,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get investment =>
-      RoundContainer(
+  get investment => RoundContainer(
         child: Row(
           children: [
             '투자'.text.bold.size(20).make(),
@@ -89,8 +91,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get spend =>
-      RoundContainer(
+  get spend => RoundContainer(
         child: Row(
           children: [
             '소비'.text.bold.size(20).make(),
@@ -103,8 +104,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get etcHorizontal =>
-      SizedBox(
+  get etcHorizontal => SizedBox(
         height: 150,
         child: ListView(
           scrollDirection: Axis.horizontal,
@@ -140,8 +140,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get extraButtons =>
-      Row(
+  get extraButtons => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           RoundContainer(child: '화면설정'.text.make()),
