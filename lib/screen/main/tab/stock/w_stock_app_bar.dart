@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/common.dart';
+import 'search/s_stock_search.dart';
 
 class StockAppBar extends StatelessWidget {
   final double appBarHeight;
@@ -28,9 +29,12 @@ class StockAppBar extends StatelessWidget {
                   height: 30,
                 ),
                 width10,
-                Image.asset(
-                  '$basePath/icon/stock_search.png',
-                  height: 30,
+                Tap(
+                  onTap: () => Nav.push(const StockSearchScreen()),
+                  child: Image.asset(
+                    '$basePath/icon/stock_search.png',
+                    height: 30,
+                  ),
                 ),
                 width10,
                 Image.asset(
