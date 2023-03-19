@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../common/widget/w_arrow.dart';
 import '../home/w_simple_button.dart';
+import 'w_interest_stock_list.dart';
 
 class StockFragment extends StatefulWidget {
   const StockFragment({
@@ -85,6 +86,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
               arrowDirection: AxisDirection.up,
             ),
             height10,
+            InterestStockList(),
           ],
         ),
       );
