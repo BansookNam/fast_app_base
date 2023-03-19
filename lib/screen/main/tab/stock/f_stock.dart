@@ -3,7 +3,7 @@ import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/screen/main/tab/stock/w_stock_app_bar.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../common/widget/w_right_arrow.dart';
+import '../../../../common/widget/w_arrow.dart';
 import '../home/w_simple_button.dart';
 
 class StockFragment extends StatefulWidget {
@@ -30,6 +30,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
             tabBar,
             myAccount,
             height20,
+            myStocks,
           ],
         ),
         StockAppBar(
@@ -50,7 +51,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
             Row(children: [
               width20,
               '4400원'.text.size(24).bold.make(),
-              const RightArrow(),
+              const Arrow(),
               emptyExpanded,
               const RoundSquareButton('채우기'),
               width10
@@ -60,6 +61,29 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
             height20,
             const SimpleButton('주문내역'),
             const SimpleButton('판매수익'),
+            height10,
+          ],
+        ),
+      );
+
+  Widget get myStocks => Container(
+        color: context.appColors.layerBackground,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            height40,
+            Row(children: [
+              width20,
+              '관심 주식'.text.size(20).bold.make(),
+              emptyExpanded,
+              '편집하기'.text.color(context.appColors.dimmedText).make(),
+              width20
+            ]),
+            height20,
+            const SimpleButton(
+              '기본',
+              arrowDirection: AxisDirection.up,
+            ),
             height10,
           ],
         ),
