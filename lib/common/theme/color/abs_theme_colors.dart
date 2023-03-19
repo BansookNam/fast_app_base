@@ -10,6 +10,8 @@ abstract class AbstractThemeColors {
 
   Color get appbarBackground => const Color.fromARGB(255, 16, 16, 18);
 
+  Color get stockBackground => const Color.fromARGB(255, 16, 16, 18);
+
   Color get layerBackground => const Color.fromARGB(255, 24, 23, 28);
 
   Color get buttonBackground => const Color.fromARGB(255, 44, 44, 52);
@@ -38,7 +40,9 @@ abstract class AbstractThemeColors {
 
   Color get dimmedText => const Color.fromARGB(255, 171, 171, 171);
 
-  Color get plusRed => const Color.fromARGB(255, 230, 71, 83);
+  Color get plus => const Color.fromARGB(255, 230, 71, 83);
+
+  Color get minus => const Color.fromARGB(255, 57, 127, 228);
 
   Color get dimmedIcon => const Color.fromARGB(255, 171, 171, 171);
 

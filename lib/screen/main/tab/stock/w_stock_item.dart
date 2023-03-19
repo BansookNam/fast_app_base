@@ -10,7 +10,8 @@ class StockItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: context.appColors.stockBackground,
       height: 70,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -24,11 +25,11 @@ class StockItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              (stock.currentPrice.toComma())
+              ('${stock.todayPercentage.toComma()}%')
                   .text
                   .size(20)
                   .bold
-                  .color(context.appColors.dimmedText)
+                  .color(getPercentageColor(stock.todayPercentage, context))
                   .make(),
               height5,
               (stock.yesterdayClosePrice.toComma())
@@ -42,5 +43,15 @@ class StockItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Color getPercentageColor(double todayPercentage, BuildContext context) {
+    if (todayPercentage == 0) {
+      return context.appColors.dimmedText;
+    } else if (todayPercentage > 0) {
+      return context.appColors.plus;
+    } else {
+      return context.appColors.minus;
+    }
   }
 }

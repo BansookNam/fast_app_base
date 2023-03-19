@@ -85,8 +85,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
               '기본',
               arrowDirection: AxisDirection.up,
             ),
-            height10,
-            InterestStockList(),
+            const InterestStockList(),
           ],
         ),
       );
@@ -120,7 +119,7 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
             width20,
             'S&P 500'.text.size(13).bold.color(context.appColors.dimmedText).make(),
             width10,
-            3919.29.toComma().text.size(13).bold.color(context.appColors.plusRed).make(),
+            3919.29.toComma().text.size(13).bold.color(context.appColors.plus).make(),
           ],
         ),
       );

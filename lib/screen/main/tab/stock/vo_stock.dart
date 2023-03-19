@@ -1,3 +1,5 @@
+import 'package:get/utils.dart';
+
 class Stock {
   final String stockName;
   final int yesterdayClosePrice;
@@ -10,4 +12,7 @@ class Stock {
     required this.currentPrice,
     required this.stockImagePath,
   });
+
+  double get todayPercentage =>
+      ((currentPrice - yesterdayClosePrice) / yesterdayClosePrice * 100).toPrecision(2);
 }
