@@ -1,4 +1,4 @@
-import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:flutter/material.dart';
 
 class SendButton extends StatelessWidget {
@@ -6,10 +6,6 @@ class SendButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoundContainer(
-      backgroundColor: const Color.fromRGBO(44, 44, 52, 1.0),
-      padding: 10,
-      child: '송금'.text.make(),
-    );
+    return const RoundSquareButton('송금');
   }
 }

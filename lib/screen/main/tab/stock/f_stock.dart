@@ -1,6 +1,10 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/screen/main/tab/stock/w_stock_app_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../common/widget/w_right_arrow.dart';
+import '../home/w_simple_button.dart';
 
 class StockFragment extends StatefulWidget {
   const StockFragment({
@@ -19,32 +23,64 @@ class _StockFragmentState extends State<StockFragment> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        StockAppBar(
-          appBarHeight: appBarHeight,
-        ),
         ListView(
           padding: EdgeInsets.only(top: appBarHeight),
           children: [
             title,
-            Container(
-              color: context.appColors.layerBackground,
-              child: Column(
-                children: [
-                  TabBar(
-                    tabs: ['내 주식'.text.make(), '오늘의 발견'.text.make()],
-                    controller: tabController,
-                    indicatorColor: Colors.white,
-                    labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    labelPadding: const EdgeInsets.symmetric(vertical: 20),
-                    indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  ),
-                  const Line(),
-                ],
-              ),
-            )
+            tabBar,
+            myAccount,
+            height20,
           ],
         ),
+        StockAppBar(
+          appBarHeight: appBarHeight,
+        ),
       ],
+    );
+  }
+
+  Widget get myAccount => Container(
+        color: context.appColors.layerBackground,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            height20,
+            '계좌'.text.make().pOnly(left: 20),
+            height10,
+            Row(children: [
+              width20,
+              '4400원'.text.size(24).bold.make(),
+              const RightArrow(),
+              emptyExpanded,
+              const RoundSquareButton('채우기'),
+              width10
+            ]),
+            height40,
+            const Line(),
+            height20,
+            const SimpleButton('주문내역'),
+            const SimpleButton('판매수익'),
+            height10,
+          ],
+        ),
+      );
+
+  Container get tabBar {
+    return Container(
+      color: context.appColors.layerBackground,
+      child: Column(
+        children: [
+          TabBar(
+            tabs: ['내 주식'.text.make(), '오늘의 발견'.text.make()],
+            controller: tabController,
+            indicatorColor: Colors.white,
+            labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            labelPadding: const EdgeInsets.symmetric(vertical: 20),
+            indicatorPadding: const EdgeInsets.symmetric(horizontal: 20),
+          ),
+          const Line(),
+        ],
+      ),
     );
   }
 

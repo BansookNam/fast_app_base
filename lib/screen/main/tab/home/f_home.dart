@@ -51,7 +51,7 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   get appBar => TossAppBar(appBarHeight: appBarHeight);
 
-  get tossbankButton => RoundContainer(
+  get tossbankButton => RoundSquareContainer(
         child: Row(
           children: [
             '토스뱅크'.text.bold.size(20).make(),
@@ -64,7 +64,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get assets => RoundContainer(
+  get assets => RoundSquareContainer(
         child: Column(
           children: [
             Row(
@@ -78,7 +78,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get investment => RoundContainer(
+  get investment => RoundSquareContainer(
         child: Row(
           children: [
             '투자'.text.bold.size(20).make(),
@@ -91,7 +91,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         ),
       );
 
-  get spend => RoundContainer(
+  get spend => RoundSquareContainer(
         child: Row(
           children: [
             '소비'.text.bold.size(20).make(),
@@ -110,7 +110,7 @@ class _HomeFragmentState extends State<HomeFragment> {
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           children: [
-            RoundContainer(
+            RoundSquareContainer(
               height: 150,
               sideMargin: 5,
               child: Row(
@@ -123,7 +123,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 ],
               ),
             ),
-            RoundContainer(
+            RoundSquareContainer(
               height: 150,
               sideMargin: 5,
               child: Row(
@@ -143,8 +143,8 @@ class _HomeFragmentState extends State<HomeFragment> {
   get extraButtons => Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          RoundContainer(child: '화면설정'.text.make()),
-          RoundContainer(child: '자산 추가'.text.make()),
+          RoundSquareContainer(child: '화면설정'.text.make()),
+          RoundSquareContainer(child: '자산 추가'.text.make()),
         ],
       );
 
