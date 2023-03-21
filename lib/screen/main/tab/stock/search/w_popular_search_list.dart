@@ -23,8 +23,10 @@ class _PopularSearchListState extends State<PopularSearchList> {
         ).pSymmetric(h: 20, v: 15),
         height20,
         ...popularStocks
-            .map((e) => Row(
+            .mapIndexed((e, index) => Row(
                   children: [
+                    (index + 1).text.bold.white.size(16).make(),
+                    width20,
                     e.stockName.text.bold.white.size(16).make(),
                     emptyExpanded,
                     e.todayPercentageString.text
@@ -32,7 +34,7 @@ class _PopularSearchListState extends State<PopularSearchList> {
                         .size(16)
                         .make(),
                   ],
-                ))
+                ).pSymmetric(h: 20, v: 20))
             .toList()
       ],
     );
