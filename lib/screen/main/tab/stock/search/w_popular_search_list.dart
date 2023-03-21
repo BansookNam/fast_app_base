@@ -1,3 +1,4 @@
+import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearchList extends StatefulWidget {
@@ -10,6 +11,16 @@ class PopularSearchList extends StatefulWidget {
 class _PopularSearchListState extends State<PopularSearchList> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        Row(
+          children: [
+            '인기 검색'.text.bold.white.size(16).make(),
+            emptyExpanded,
+            '오늘 ${DateTime.now().formattedTime}'.text.white.size(12).make(),
+          ],
+        ),
+      ],
+    );
   }
 }
