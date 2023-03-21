@@ -1,7 +1,7 @@
-import 'stock_percentage_calculator.dart';
+import 'stock_percentage_data_provider.dart';
 import 'vo_simple_stock.dart';
 
-class Stock extends SimpleStock with StockPercentageCalculator {
+class Stock extends SimpleStock with StockPercentageDataProvider {
   final int yesterdayClosePrice;
   final int currentPrice;
   final String stockImagePath;

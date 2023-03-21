@@ -25,11 +25,11 @@ class StockItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ('${stock.todayPercentage.toComma()}%')
+              (stock.todayPercentageString)
                   .text
                   .size(20)
                   .bold
-                  .color(getPercentageColor(stock.todayPercentage, context))
+                  .color(stock.getTodayPercentageColor(context))
                   .make(),
               height5,
               (stock.yesterdayClosePrice.toComma())
@@ -43,15 +43,5 @@ class StockItem extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Color getPercentageColor(double todayPercentage, BuildContext context) {
-    if (todayPercentage == 0) {
-      return context.appColors.dimmedText;
-    } else if (todayPercentage > 0) {
-      return context.appColors.plus;
-    } else {
-      return context.appColors.minus;
-    }
   }
 }

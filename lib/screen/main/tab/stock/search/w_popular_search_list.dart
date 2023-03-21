@@ -1,4 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/main/tab/stock/search/dummy_popular_stocks.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearchList extends StatefulWidget {
@@ -20,6 +21,19 @@ class _PopularSearchListState extends State<PopularSearchList> {
             '오늘 ${DateTime.now().formattedTime} 기준'.text.white.size(12).make(),
           ],
         ).pSymmetric(h: 20, v: 15),
+        height20,
+        ...popularStocks
+            .map((e) => Row(
+                  children: [
+                    e.stockName.text.bold.white.size(16).make(),
+                    emptyExpanded,
+                    e.todayPercentageString.text
+                        .color(e.getTodayPercentageColor(context))
+                        .size(16)
+                        .make(),
+                  ],
+                ))
+            .toList()
       ],
     );
   }
