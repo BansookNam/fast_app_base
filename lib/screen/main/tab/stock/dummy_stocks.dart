@@ -1,6 +1,6 @@
 import 'package:fast_app_base/common/common.dart';
 
-import 'vo_stock.dart';
+import 'vo/vo_stock.dart';
 
 List<Stock> get myInterestStock => [
       Stock(

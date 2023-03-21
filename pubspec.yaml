@@ -114,6 +114,7 @@ flutter:
     - assets/image/credit_card/
     - assets/image/illustration/
     - assets/translations/
+    - assets/json/
     - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see

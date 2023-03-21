@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common/common.dart';
-import 'vo_stock.dart';
+import 'vo/vo_stock.dart';
 
 class StockItem extends StatelessWidget {
   final Stock stock;
