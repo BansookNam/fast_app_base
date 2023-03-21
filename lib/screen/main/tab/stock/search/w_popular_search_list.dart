@@ -17,9 +17,9 @@ class _PopularSearchListState extends State<PopularSearchList> {
           children: [
             '인기 검색'.text.bold.white.size(16).make(),
             emptyExpanded,
-            '오늘 ${DateTime.now().formattedTime}'.text.white.size(12).make(),
+            '오늘 ${DateTime.now().formattedTime} 기준'.text.white.size(12).make(),
           ],
-        ),
+        ).pSymmetric(h: 20, v: 15),
       ],
     );
   }

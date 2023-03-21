@@ -15,10 +15,16 @@ class StockSearchScreen extends StatefulWidget {
 
 class _StockSearchScreenState extends State<StockSearchScreen> {
   final TextEditingController _controller = TextEditingController();
+  late final searchData = Get.find<StockSearchData>();
 
   @override
   void initState() {
-    Get.put(StockSearchData());
+    if (!Get.isRegistered<StockSearchData>()) {
+      Get.put(StockSearchData());
+    }
+    _controller.addListener(() {
+      searchData.search(_controller.text);
+    });
     super.initState();
   }
 
@@ -27,11 +33,19 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
     return Scaffold(
       backgroundColor: context.appColors.background,
       appBar: SearchBar(controller: _controller),
-      body: ListView(
-        children: const [
-          SearchHistoryList(),
-          PopularSearchList(),
-        ],
+      body: Obx(
+        () => searchData.searchResult.isEmpty
+            ? ListView(
+                children: const [
+                  SearchHistoryList(),
+                  PopularSearchList(),
+                ],
+              )
+            : ListView(
+                children: searchData.searchResult
+                    .map<Widget>((element) => element.name.text.make())
+                    .toList(),
+              ),
       ),
     );
   }
