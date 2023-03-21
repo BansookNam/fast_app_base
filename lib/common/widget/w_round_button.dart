@@ -10,7 +10,7 @@ class RoundSquareButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundSquareContainer(
       backgroundColor: const Color.fromRGBO(44, 44, 52, 1.0),
-      padding: 7,
+      padding: const EdgeInsets.all(7),
       borderRadius: 7,
       child: buttonText.text.make(),
     );

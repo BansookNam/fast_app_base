@@ -5,7 +5,7 @@ class RoundSquareContainer extends StatelessWidget {
   final Widget child;
   final double? height;
   final double sideMargin;
-  final double padding;
+  final EdgeInsets padding;
   final double borderRadius;
   final Color? backgroundColor;
 
@@ -13,16 +13,18 @@ class RoundSquareContainer extends StatelessWidget {
     required this.child,
     this.height,
     this.sideMargin = 15,
-    this.padding = 20,
     this.borderRadius = 15,
     this.backgroundColor,
+    EdgeInsets? padding,
     Key? key,
-  }) : super(key: key);
+  })  : padding = padding ?? const EdgeInsets.all(15),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(padding),
+      height: height,
+      padding: padding,
       margin: EdgeInsets.symmetric(horizontal: sideMargin),
       decoration: BoxDecoration(
         color: backgroundColor ?? context.appColors.layerBackground,

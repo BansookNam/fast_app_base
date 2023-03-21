@@ -1,5 +1,7 @@
 import 'package:fast_app_base/common/common.dart';
+import 'package:fast_app_base/screen/main/tab/stock/search/w_popular_search_list.dart';
 import 'package:fast_app_base/screen/main/tab/stock/search/w_search_bar.dart';
+import 'package:fast_app_base/screen/main/tab/stock/search/w_search_history_list.dart';
 import 'package:flutter/material.dart';
 
 class StockSearchScreen extends StatefulWidget {
@@ -17,8 +19,11 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
     return Scaffold(
       backgroundColor: context.appColors.background,
       appBar: SearchBar(controller: _controller),
-      body: const Center(
-        child: Text('Stock Search'),
+      body: ListView(
+        children: const [
+          SearchHistoryList(),
+          PopularSearchList(),
+        ],
       ),
     );
   }
