@@ -22,6 +22,6 @@ class StockSearchData extends GetxController {
       searchResult.clear();
       return;
     }
-    searchResult.value = stocks.where((element) => element.name.contains(text)).toList();
+    searchResult.value = stocks.where((element) => element.stockName.contains(text)).toList();
   }
 }

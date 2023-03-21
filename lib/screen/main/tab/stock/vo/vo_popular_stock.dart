@@ -1,17 +1,14 @@
-import 'package:get/utils.dart';
+import 'package:fast_app_base/screen/main/tab/stock/vo/vo_simple_stock.dart';
+import 'package:get/get_utils/get_utils.dart';
 
-import 'vo_simple_stock.dart';
-
-class Stock extends SimpleStock {
+class PopularStock extends SimpleStock {
   final int yesterdayClosePrice;
   final int currentPrice;
-  final String stockImagePath;
 
-  Stock({
+  PopularStock({
     required super.stockName,
     required this.yesterdayClosePrice,
     required this.currentPrice,
-    required this.stockImagePath,
   });
 
   double get todayPercentage =>

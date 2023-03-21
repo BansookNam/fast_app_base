@@ -43,7 +43,7 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
               )
             : ListView(
                 children: searchData.searchResult
-                    .map<Widget>((element) => element.name.text.make())
+                    .map<Widget>((element) => element.stockName.text.make())
                     .toList(),
               ),
       ),
