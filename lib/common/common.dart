@@ -18,6 +18,5 @@ export 'widget/w_line.dart';
 export 'widget/w_tap.dart';
 
 const defaultFontStyle = GoogleFonts.ptSerif;
-const highlightFontStyle = GoogleFonts.padauk;
 
 void voidFunction() {}
