@@ -1,5 +1,7 @@
+import 'package:fast_app_base/screen/main/tab/stock/search/stock_search_data.dart';
 import 'package:fast_app_base/screen/main/tab/stock/search/w_search_history_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchHistoryList extends StatefulWidget {
   const SearchHistoryList({Key? key}) : super(key: key);
@@ -9,7 +11,9 @@ class SearchHistoryList extends StatefulWidget {
 }
 
 class _SearchHistoryListState extends State<SearchHistoryList> {
-  List<String> historyList = ['삼성전자', '셀트리온', 'TSLQ', '넷플릭스'];
+  late final searchHistoryData = Get.find<StockSearchData>();
+
+  get historyList => searchHistoryData.searchHistoryList;
 
   @override
   Widget build(BuildContext context) {

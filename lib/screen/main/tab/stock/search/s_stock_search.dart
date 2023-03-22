@@ -6,6 +6,8 @@ import 'package:fast_app_base/screen/main/tab/stock/search/w_search_history_list
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 's_stock_detail.dart';
+
 class StockSearchScreen extends StatefulWidget {
   const StockSearchScreen({Key? key}) : super(key: key);
 
@@ -29,6 +31,12 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
   }
 
   @override
+  void dispose() {
+    searchData.searchResult.clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.appColors.background,
@@ -41,10 +49,22 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
                   PopularSearchList(),
                 ],
               )
-            : ListView(
-                children: searchData.searchResult
-                    .map<Widget>((element) => element.stockName.text.make())
-                    .toList(),
+            : ListView.builder(
+                itemCount: searchData.searchResult.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final element = searchData.searchResult[index];
+                  return Tap(
+                    onTap: () {
+                      Nav.push(StockDetail(stockName: element.stockName));
+                      searchData.addSearchHistory(element.stockName);
+                      _controller.clear();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      child: element.stockName.text.make(),
+                    ),
+                  );
+                },
               ),
       ),
     );
