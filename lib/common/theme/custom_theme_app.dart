@@ -15,13 +15,7 @@ class CustomThemeApp extends StatefulWidget {
 }
 
 class _CustomThemeAppState extends State<CustomThemeApp> {
-  late CustomTheme theme;
-
-  @override
-  void initState() {
-    initTheme();
-    super.initState();
-  }
+  late CustomTheme theme = savedTheme ?? systemTheme;
 
   void handleChangeTheme(CustomTheme theme) {
     setState(() => this.theme = theme);
@@ -36,23 +30,14 @@ class _CustomThemeAppState extends State<CustomThemeApp> {
     );
   }
 
-  void initTheme() async {
-    CustomTheme? theme = Prefs.appTheme.get();
-    if (theme == null) {
-      _initSystemTheme();
-    } else {
-      this.theme = theme;
-    }
-  }
+  CustomTheme? get savedTheme => Prefs.appTheme.get();
 
-  void _initSystemTheme() {
+  CustomTheme get systemTheme {
     switch (ThemeUtil.systemBrightness) {
       case Brightness.dark:
-        theme = CustomTheme.dark;
-        break;
+        return CustomTheme.dark;
       case Brightness.light:
-        theme = CustomTheme.light;
-        break;
+        return CustomTheme.light;
     }
   }
 }
