@@ -30,7 +30,6 @@ enum Language {
   }
 }
 
-Language get currentLanguage =>
-    App.navigatorKey.currentContext!.locale.languageCode == 'ko' ? Language.korean : Language.english;
-
-class S {}
+Language get currentLanguage => App.navigatorKey.currentContext!.locale.languageCode == 'ko'
+    ? Language.korean
+    : Language.english;
