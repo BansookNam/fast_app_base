@@ -7,10 +7,11 @@
 
 import 'dart:io';
 
-import 'package:easy_localization/easy_localization.dart';
 import 'package:fast_app_base/app.dart';
+import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/data/app_preferences.dart';
 import 'package:fast_app_base/common/language/language.dart';
+import 'package:fast_app_base/common/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:isar/isar.dart';
@@ -26,11 +27,18 @@ void main() {
     await AppPreferences.init();
   });
 
-  testWidgets('앱 실행 및 기본 텍스트 확인', (WidgetTester tester) async {
+  testWidgets('앱 실행 및 기본 세팅 확인', (WidgetTester tester) async {
     await pumpApp(tester);
     await tester.pumpAndSettle();
 
+    // 1. Localizations test
     expect(currentLanguage, Language.korean); //startLocale: const Locale('ko') 이 설정되어 있으므로 한국어로 시작
+
+    // 2. Custom Theme test
+    expect(App.navigatorKey.currentContext!.themeType, CustomTheme.light);
+    App.navigatorKey.currentContext!.changeTheme(CustomTheme.dark);
+    await tester.pump();
+    expect(App.navigatorKey.currentContext!.themeType, CustomTheme.dark);
   });
 }
 
