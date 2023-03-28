@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+
 void delay(Function func, {int milliseconds = 300}) async {
   Timer(Duration(milliseconds: milliseconds), () {
     func();
@@ -26,6 +28,12 @@ Future sleepUntil(bool Function() predict, {milliSeconds = 200}) async {
   while (!predict()) {
     await sleepAsync(milliSeconds);
   }
+}
+
+void runOnUI(void Function() uiFunction) {
+  WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    uiFunction();
+  });
 }
 
 class DelayTarget {

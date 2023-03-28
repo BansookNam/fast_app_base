@@ -1,3 +1,5 @@
+import 'dart:async';
+
 class SimpleResult<SuccessType, FailureType> {
   bool get isFailure => this is _Failure<SuccessType, FailureType>;
 
@@ -27,25 +29,26 @@ class SimpleResult<SuccessType, FailureType> {
     throw const FormatException('This is not Success type');
   }
 
-  SimpleResult runIfSuccess(void Function(SuccessType data) function) {
-    if (isSuccess) {
-      if (!_isSuccessDataExist) {
-        function(null as SuccessType);
-      } else {
-        function(successData);
-      }
-    }
+  SimpleResult runIfSuccess(FutureOr<void> Function(SuccessType data) function) {
+    _runSuccess(function);
     return this;
   }
 
-  SimpleResult runIfFailure(void Function(FailureType error) function) {
-    if (isFailure) {
-      if (!_isFailureDataExist) {
-        function(null as FailureType);
-      } else {
-        function(failureData);
-      }
-    }
+  SimpleResult runIfFailure(FutureOr<void> Function(FailureType error) function) {
+    _runFailure(function);
+    return this;
+  }
+
+  FutureOr<SimpleResult> runIfSuccessAsync(
+      FutureOr<void> Function(SuccessType data) function) async {
+    await _runSuccess(function);
+    return this;
+  }
+
+
+  FutureOr<SimpleResult> runIfFailureAsync(
+      FutureOr<void> Function(FailureType error) function) async {
+    await _runFailure(function);
     return this;
   }
 
@@ -62,6 +65,28 @@ class SimpleResult<SuccessType, FailureType> {
     }
     return true;
   }
+
+  Future<void> _runSuccess(FutureOr<void> Function(SuccessType data) function) async {
+    if (isSuccess) {
+      if (!_isSuccessDataExist) {
+        await function(null as SuccessType);
+      } else {
+        await function(successData);
+      }
+    }
+  }
+
+
+  Future<void> _runFailure(FutureOr<void> Function(FailureType error) function) async {
+    if (isFailure) {
+      if (!_isFailureDataExist) {
+        await function(null as FailureType);
+      } else {
+        await function(failureData);
+      }
+    }
+  }
+
 
   // ignore: library_private_types_in_public_api
   static _Failure<SuccessType, FailureType> failure<SuccessType, FailureType>([FailureType? data]) {

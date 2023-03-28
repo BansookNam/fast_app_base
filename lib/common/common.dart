@@ -12,6 +12,7 @@ export '../common/dart/extension/num_duration_extension.dart';
 export '../common/dart/extension/velocityx_extension.dart';
 export '../common/dart/kotlin_style/kotlin_extension.dart';
 export 'constants.dart';
+export 'dart/extension/snackbar_context_extension.dart';
 export 'util/async.dart';
 export 'widget/w_height_and_width.dart';
 export 'widget/w_line.dart';
