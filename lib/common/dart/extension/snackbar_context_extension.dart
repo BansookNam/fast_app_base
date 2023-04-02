@@ -4,10 +4,10 @@ import '../../common.dart';
 
 extension SnackbarContextExtension on BuildContext {
   ///Scaffold안에 Snackbar를 보여줍니다.
-  void showSnackbar(String message) {
+  void showSnackbar(String message, {Widget? extraButton}) {
     _showSnackBarWithContext(
       this,
-      _SnackbarFactory.createSnackBar(this, message),
+      _SnackbarFactory.createSnackBar(this, message, extraButton: extraButton),
     );
   }
 
@@ -36,7 +36,8 @@ void _showSnackBarWithContext(BuildContext context, SnackBar snackbar) {
 
 class _SnackbarFactory {
   static SnackBar createSnackBar(BuildContext context, String message,
-      {Color bgColor = AppColors.brightBlue}) {
+      {Color? bgColor, Widget? extraButton}) {
+    Color snackbarBgColor = bgColor ?? context.appColors.snackbarBgColor;
     return SnackBar(
         elevation: 0,
         behavior: SnackBarBehavior.fixed,
@@ -50,25 +51,22 @@ class _SnackbarFactory {
             }
           },
           child: Container(
-            color: Colors.transparent,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Center(
-                  child: Container(
-                      width: context.deviceWidth - 40,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
-                      decoration:
-                          BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(5)),
-                      child: Center(
-                        child: Text(message,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontStyle: FontStyle.normal,
-                            )),
+            decoration: BoxDecoration(
+              color: snackbarBgColor,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(message,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontStyle: FontStyle.normal,
                       )),
                 ),
+                if (extraButton != null) extraButton,
               ],
             ),
           ),
@@ -86,28 +84,18 @@ class _SnackbarFactory {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },
           child: Container(
-            color: Colors.transparent,
-            margin: EdgeInsets.only(bottom: bottomMargin),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Center(
-                  child: Container(
-                      width: context.deviceWidth - 40,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
-                      decoration:
-                          BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(5)),
-                      child: Center(
-                        child: Text("$message",
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontStyle: FontStyle.normal,
-                            )),
-                      )),
-                ),
-              ],
+            decoration: BoxDecoration(
+              color: bgColor,
+              borderRadius: BorderRadius.circular(5),
             ),
+            padding: const EdgeInsets.all(20),
+            margin: EdgeInsets.only(bottom: bottomMargin),
+            child: Text("$message",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontStyle: FontStyle.normal,
+                )),
           ),
         ));
   }

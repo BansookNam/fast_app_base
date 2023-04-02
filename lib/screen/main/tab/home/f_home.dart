@@ -12,7 +12,7 @@ class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.lightBlue,
+      color: Colors.green,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -49,6 +49,14 @@ class HomeFragment extends StatelessWidget {
                       textColor: Colors.redAccent,
                     ).show();
                   });
+
+                  // context.showSnackbar('snackbar 입니다.',
+                  //     extraButton: Tap(
+                  //       onTap: () {
+                  //         context.showErrorSnackbar('error');
+                  //       },
+                  //       child: '확인'.text.white.size(13).make().centered().pSymmetric(h: 10, v: 5),
+                  //     ));
                 },
                 child: '홈'.text.white.size(20).make().centered()),
           ),

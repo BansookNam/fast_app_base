@@ -34,5 +34,7 @@ abstract class AbstractThemeColors {
 
   Color get confirmText => AppColors.blue;
 
-  Color? get drawerText => text;
+  Color get drawerText => text;
+
+  Color get snackbarBgColor => AppColors.mediumBlue;
 }
