@@ -42,7 +42,7 @@ class _SnackbarFactory {
         elevation: 0,
         behavior: SnackBarBehavior.fixed,
         backgroundColor: Colors.transparent,
-        content: GestureDetector(
+        content: Tap(
           onTap: () {
             try {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -79,7 +79,7 @@ class _SnackbarFactory {
         elevation: 0,
         behavior: SnackBarBehavior.fixed,
         backgroundColor: Colors.transparent,
-        content: GestureDetector(
+        content: Tap(
           onTap: () {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
           },

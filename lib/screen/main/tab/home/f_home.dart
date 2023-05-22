@@ -17,8 +17,7 @@ class HomeFragment extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
+            child: Tap(
                 onLongPress: () {
                   Scaffold.of(context).openDrawer();
                 },

@@ -32,7 +32,7 @@ class _ModeSwitchState extends State<ModeSwitch> {
   @override
   Widget build(BuildContext context) {
     const aspectRatio = (40 / 25);
-    return GestureDetector(
+    return Tap(
       onTap: () => widget.onChanged(!widget.value),
       child: Row(
         children: [

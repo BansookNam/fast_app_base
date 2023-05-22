@@ -34,12 +34,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
     return Material(
       color: Colors.transparent,
       child: SafeArea(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
+        child: Tap(
           onTap: () {
             closeDrawer(context);
           },
-          child: GestureDetector(
+          child: Tap(
             onTap: () {},
             child: Container(
               width: 240,
@@ -128,7 +127,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           Row(
             children: [
               Expanded(
-                child: GestureDetector(
+                child: Tap(
                   child: Container(
                       height: 30,
                       width: 100,
