@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 
 import '../../../../../common/widget/w_arrow.dart';
 
-class SearchBar extends StatelessWidget implements PreferredSizeWidget {
+class SearchBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final TextEditingController controller;
 
-  const SearchBar({required this.controller, Key? key}) : super(key: key);
+  const SearchBarWidget({required this.controller, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

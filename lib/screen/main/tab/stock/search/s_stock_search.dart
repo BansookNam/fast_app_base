@@ -40,7 +40,7 @@ class _StockSearchScreenState extends State<StockSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.appColors.background,
-      appBar: SearchBar(controller: _controller),
+      appBar: SearchBarWidget(controller: _controller),
       body: Obx(
         () => searchData.searchResult.isEmpty
             ? ListView(

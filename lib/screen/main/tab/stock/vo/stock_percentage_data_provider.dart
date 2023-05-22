@@ -2,7 +2,7 @@ import 'package:fast_app_base/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:get/utils.dart';
 
-abstract class StockPercentageDataProvider {
+abstract mixin class StockPercentageDataProvider {
   int get currentPrice;
 
   int get yesterdayClosePrice;

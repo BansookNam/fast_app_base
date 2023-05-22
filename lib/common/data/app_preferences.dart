@@ -22,7 +22,7 @@ class AppPreferences {
         return _prefs.setDouble(key.key, value as double);
       case bool:
         return _prefs.setBool(key.key, value as bool);
-      case List<String>:
+      case const (List<String>):
         return _prefs.setStringList(key.key, value as List<String>);
       default:
         if (value is Enum) {
@@ -47,7 +47,7 @@ class AppPreferences {
         return _prefs.getDouble(key.key) as T? ?? key.defaultValue;
       case bool:
         return _prefs.getBool(key.key) as T? ?? key.defaultValue;
-      case List<String>:
+      case const (List<String>):
         return _prefs.getStringList(key.key) as T? ?? key.defaultValue;
       default:
         return transform(T, _prefs.getString(key.key)) ?? key.defaultValue;
