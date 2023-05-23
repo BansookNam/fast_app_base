@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class RoundSquareContainer extends StatelessWidget {
   final Widget child;
   final double? height;
+  final double? width;
   final double sideMargin;
   final EdgeInsets padding;
   final double borderRadius;
@@ -12,6 +13,7 @@ class RoundSquareContainer extends StatelessWidget {
   const RoundSquareContainer({
     required this.child,
     this.height,
+    this.width,
     this.sideMargin = 15,
     this.borderRadius = 15,
     this.backgroundColor,
@@ -24,6 +26,7 @@ class RoundSquareContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: height,
+      width: width,
       padding: padding,
       margin: EdgeInsets.symmetric(horizontal: sideMargin),
       decoration: BoxDecoration(

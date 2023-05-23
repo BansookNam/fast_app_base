@@ -16,14 +16,18 @@ class App extends StatefulWidget {
 class AppState extends State<App> with Nav {
   @override
   GlobalKey<NavigatorState> get navigatorKey => App.navigatorKey;
+  Count count = Count();
 
   @override
   Widget build(BuildContext context) {
+    print(count.value);
+    count.value++;
     return CustomThemeApp(
       child: Builder(builder: (context) {
         return MaterialApp(
           navigatorKey: App.navigatorKey,
           localizationsDelegates: context.localizationDelegates,
+          debugShowCheckedModeBanner: false,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
           title: 'Image Finder',
@@ -33,4 +37,8 @@ class AppState extends State<App> with Nav {
       }),
     );
   }
+}
+
+class Count extends ValueNotifier<int> {
+  Count() : super(0);
 }

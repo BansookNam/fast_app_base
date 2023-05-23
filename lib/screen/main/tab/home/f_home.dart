@@ -3,6 +3,8 @@ import 'package:fast_app_base/screen/main/tab/home/w_account_list.dart';
 import 'package:fast_app_base/screen/main/tab/home/w_toss_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'dummy_etc.dart';
+
 class HomeFragment extends StatefulWidget {
   const HomeFragment({
     Key? key,
@@ -109,34 +111,35 @@ class _HomeFragmentState extends State<HomeFragment> {
         child: ListView(
           scrollDirection: Axis.horizontal,
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          children: [
-            RoundSquareContainer(
-              height: 150,
-              sideMargin: 5,
-              child: Row(
-                children: [
-                  '토스뱅크'.text.bold.size(20).make(),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                  )
-                ],
-              ),
-            ),
-            RoundSquareContainer(
-              height: 150,
-              sideMargin: 5,
-              child: Row(
-                children: [
-                  '토스뱅크'.text.bold.size(20).make(),
-                  const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                  )
-                ],
-              ),
-            ),
-          ],
+          children: etcItems
+              .map((e) => RoundSquareContainer(
+                    sideMargin: 5,
+                    width: 100,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        e.subTitle.text.medium.color(context.appColors.dimmedText).size(13).make(),
+                        Height(10),
+                        Row(
+                          children: [
+                            e.title.text.bold.size(18).make(),
+                          ],
+                        ),
+                        const EmptyExpanded(),
+                        Row(
+                          children: [
+                            Expanded(child: Container()),
+                            Image.asset(
+                              e.image,
+                              width: 35,
+                              height: 35,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ))
+              .toList(),
         ),
       );
 
