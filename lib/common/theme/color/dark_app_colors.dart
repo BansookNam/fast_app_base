@@ -1,4 +1,3 @@
-
 import 'package:fast_app_base/common/theme/color/abs_theme_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +24,7 @@ class DarkAppColors extends AbstractThemeColors {
   Color get iconButtonInactivate => const Color.fromARGB(255, 131, 131, 131);
 
   @override
-  Color get inActivate =>  const Color.fromARGB(255, 65, 68, 74);
+  Color get inActivate => const Color.fromARGB(255, 65, 68, 74);
 
   @override
   Color get text => Colors.white;
@@ -35,4 +34,7 @@ class DarkAppColors extends AbstractThemeColors {
 
   @override
   Color get confirmText => AppColors.brightBlue;
+
+  @override
+  Color get blueButtonBackground => AppColors.blue;
 }
