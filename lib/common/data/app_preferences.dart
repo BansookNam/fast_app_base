@@ -27,7 +27,7 @@ class AppPreferences {
         return _prefs.setDouble(key, value as double);
       case bool:
         return _prefs.setBool(key, value as bool);
-      case List<String>:
+      case const (List<String>):
         return _prefs.setStringList(key, value as List<String>);
       default:
         if (value is Enum) {
@@ -54,7 +54,7 @@ class AppPreferences {
         return _prefs.getDouble(key) as T? ?? item.defaultValue;
       case bool:
         return _prefs.getBool(key) as T? ?? item.defaultValue;
-      case List<String>:
+      case const (List<String>):
         return _prefs.getStringList(key) as T? ?? item.defaultValue;
       default:
         return transform(T, _prefs.getString(key)) ?? item.defaultValue;
@@ -74,7 +74,6 @@ class AppPreferences {
     }
   }
 }
-
 
 class PreferenceItem<T> {
   final T? defaultValue;
