@@ -2,7 +2,6 @@ import 'package:fast_app_base/screen/main/tab/tab_item.dart';
 import 'package:fast_app_base/screen/main/tab/tab_navigator.dart';
 import 'package:flutter/material.dart';
 
-import '../../app.dart';
 import '../../common/common.dart';
 import 'w_menu_drawer.dart';
 
@@ -10,11 +9,10 @@ class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<MainScreen> createState() => MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen>
-    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
   TabItem _currentTab = TabItem.home;
   final tabs = [TabItem.home, TabItem.favorite];
   final List<GlobalKey<NavigatorState>> navigatorKeys = [];
@@ -25,19 +23,12 @@ class _MainScreenState extends State<MainScreen>
 
   bool get extendBody => true;
 
-  double get bottomNavigationBarBorderRadius => 30.0;
+  static double get bottomNavigationBarBorderRadius => 30.0;
 
   @override
   void initState() {
     super.initState();
     initNavigatorKeys();
-    WidgetsBinding.instance.addObserver(this);
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
   }
 
   @override
@@ -108,23 +99,6 @@ class _MainScreenState extends State<MainScreen>
         ),
       ),
     );
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        App.isForeground = true;
-        break;
-      case AppLifecycleState.inactive:
-        break;
-      case AppLifecycleState.paused:
-        App.isForeground = false;
-        break;
-      case AppLifecycleState.detached:
-        break;
-    }
-    super.didChangeAppLifecycleState(state);
   }
 
   List<BottomNavigationBarItem> navigationBarItems(BuildContext context) {
