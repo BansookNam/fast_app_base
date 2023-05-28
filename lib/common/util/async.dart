@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 extension AsyncExt on Object {
-  Timer delay(Function func, {int milliseconds = 300}) {
-    return Timer(Duration(milliseconds: milliseconds), () {
+  Timer delay(Function func, [Duration duration = const Duration(milliseconds: 50)]) {
+    return Timer(duration, () {
       if (this is State && !(this as State).mounted) {
         return;
       }
@@ -13,25 +13,27 @@ extension AsyncExt on Object {
   }
 }
 
-Timer delayTimer(Function func, {int milliseconds = 300}) {
-  return Timer(Duration(milliseconds: milliseconds), () {
+Timer delayTimer(Function func, [Duration duration = const Duration(milliseconds: 50)]) {
+  return Timer(duration, () {
     func();
   });
 }
 
-Future sleepAsync(int milliSec) {
-  return Future.delayed(Duration(milliseconds: milliSec), () => {});
+Future sleepAsync(Duration duration) {
+  return Future.delayed(duration, () => {});
 }
 
-Future sleepWhile(bool Function() predict, {milliSeconds = 200}) async {
+Future sleepWhile(bool Function() predict,
+    [Duration duration = const Duration(milliseconds: 50)]) async {
   while (predict()) {
-    await sleepAsync(milliSeconds);
+    await sleepAsync(duration);
   }
 }
 
-Future sleepUntil(bool Function() predict, {milliSeconds = 200}) async {
+Future sleepUntil(bool Function() predict,
+    [Duration duration = const Duration(milliseconds: 50)]) async {
   while (!predict()) {
-    await sleepAsync(milliSeconds);
+    await sleepAsync(duration);
   }
 }
 
