@@ -5,6 +5,7 @@ export 'package:flutter_svg/flutter_svg.dart';
 export 'package:nav/nav.dart';
 export 'package:quiver/strings.dart';
 export 'package:velocity_x/velocity_x.dart';
+export 'dart:async';
 
 export '../common/dart/extension/animation_controller_extension.dart';
 export '../common/dart/extension/context_extension.dart';
