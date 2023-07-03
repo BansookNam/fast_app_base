@@ -15,13 +15,14 @@ class OpensourceItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          package.name.text.size(20).bold.make().pOnly(left:20, bottom: 15),
-          if(package.authors.isNotEmpty)(package.authors.join(", ")).text.size(14).make().pOnly(left:20),
-          if(package.homepage?.isNotEmpty == true)(package.homepage?? "").text.make().pOnly(left:20),
+          package.name.text.size(20).bold.make().pOnly(left:20, bottom: 8),
+          package.description.text.size(14).make().pOnly(left:20, bottom: 8, right:20),
+          if(package.authors.isNotEmpty)(package.authors.join(", ")).text.size(14).make().pOnly(left:20, top:12),
+          if(isNotBlank(package.homepage))(package.homepage?? "").text.make().pOnly(left:20, top:15),
           Container(
-            decoration: BoxDecoration(color: context.appColors.drawerBg, border: Border.all(color: context.appColors.divider)),
-            margin: const EdgeInsets.only(left: 20, top:10, right:20),
-            height: 300,
+            decoration: BoxDecoration(color: context.appColors.drawerBg, border: Border.all(color: context.appColors.divider), borderRadius: BorderRadius.circular(4)),
+            margin: const EdgeInsets.only(left: 20, top:15, right:20),
+            height: 230,
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(10),
               child: Column(
