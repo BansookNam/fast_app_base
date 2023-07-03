@@ -51,8 +51,9 @@ enum CustomTheme {
       primarySwatch: primarySwatchColor,
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.dark,
+      scaffoldBackgroundColor: AppColors.veryDarkGrey,
       // textTheme: GoogleFonts.nanumMyeongjoTextTheme(
       //   ThemeData(brightness: Brightness.dark).textTheme,
       // ),
-      colorScheme: const ColorScheme.dark(background: AppColors.darkGrey));
+      colorScheme: const ColorScheme.dark(background: AppColors.veryDarkGrey));
 }

@@ -105,6 +105,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
+    - assets/json/
     - assets/image/
     - assets/image/icon/
     - assets/image/flag/
