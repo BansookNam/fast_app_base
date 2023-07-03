@@ -40,10 +40,7 @@ dependencies:
   equatable: ^2.0.5
 
   #util
-  velocity_x:
-    git:
-      url: 'https://github.com/iampawan/VelocityX.git'
-      ref: 'e4059fc'
+  velocity_x: ^4.1.0
 
   #data
   shared_preferences: ^2.0.15
@@ -93,6 +90,7 @@ dev_dependencies:
   isar_generator: 3.1.0
   mock_web_server: ^5.0.0-nullsafety.1
   test: ^1.22.0
+
 
 
 # For information on the generic Dart part of this file, see the
