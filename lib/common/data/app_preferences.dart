@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+export 'package:get/get_rx/get_rx.dart';
+export 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+
 class AppPreferences {
   static const String prefix = 'AppPreference.';
 
@@ -30,6 +33,8 @@ class AppPreferences {
         return _prefs.setBool(key, value as bool);
       case const (List<String>):
         return _prefs.setStringList(key, value as List<String>);
+      case DateTime:
+        return _prefs.setString(key, (value as DateTime).toIso8601String());
       default:
         if (value is Enum) {
           return _prefs.setString(key, describeEnum(value));
@@ -70,6 +75,8 @@ class AppPreferences {
     switch (t) {
       case CustomTheme:
         return CustomTheme.values.asNameMap()[value] as T?;
+      case DateTime:
+        return DateTime.parse(value) as T?;
       default:
         throw Exception('$t 타입에 대한 transform 함수를 추가 해주세요.');
     }
@@ -99,26 +106,26 @@ class PreferenceItem<T> {
   }
 }
 
-class NullablePreferenceItem<T> extends PreferenceItem<T?> {
-  NullablePreferenceItem(String key, T? defaultValue) : super(key, defaultValue);
-}
-
 class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
-  final R rxValue;
+  final R _rxValue;
 
   RxPreferenceItem(String key, T defaultValue)
-      : rxValue = createRxValue<T, R>(defaultValue),
+      : _rxValue = createRxValue<T, R>(defaultValue),
         super(key, defaultValue);
+
+  void load() {
+    _rxValue.value = get();
+  }
 
   @override
   void call(T value) {
-    rxValue.value = value;
+    _rxValue.value = value;
     super.call(value);
   }
 
   @override
   Future<bool> set(T value) {
-    rxValue.value = value;
+    _rxValue.value = value;
     return super.set(value);
   }
 
@@ -127,12 +134,8 @@ class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
     return AppPreferences.getValue<T>(this);
   }
 
-  R getRx() {
-    return rxValue;
-  }
-
   R get rx {
-    return rxValue;
+    return _rxValue;
   }
 
   @override
@@ -154,4 +157,8 @@ class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
         return Rx<T>(defaultValue) as R;
     }
   }
+}
+
+class NullablePreferenceItem<T> extends PreferenceItem<T?> {
+  NullablePreferenceItem(String key, [T? defaultValue]) : super(key, defaultValue);
 }
