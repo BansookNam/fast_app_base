@@ -1,14 +1,18 @@
 import '../app_preferences.dart';
 import 'preference_item.dart';
 
+export 'package:get/get_rx/get_rx.dart';
+
 class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
   final R _rxValue;
+  bool _isLoaded = false;
 
   RxPreferenceItem(String key, T defaultValue)
       : _rxValue = createRxValue<T, R>(defaultValue),
         super(key, defaultValue);
 
-  void load() {
+  void _load() {
+    _isLoaded = true;
     _rxValue.value = get();
   }
 
@@ -35,6 +39,9 @@ class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
   }
 
   R get rx {
+    if(!_isLoaded){
+      _load();
+    }
     return _rxValue;
   }
 

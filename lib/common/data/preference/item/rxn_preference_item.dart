@@ -4,12 +4,14 @@ import '../app_preferences.dart';
 
 class RxnPreferenceItem<T, R extends Rxn<T>> extends NullablePreferenceItem<T> {
   final R _rxnValue;
+  bool _isLoaded = false;
 
   RxnPreferenceItem(String key, [T? defaultValue])
       : _rxnValue = createRxnValue<T, R>(defaultValue),
         super(key, defaultValue);
 
-  void load() {
+  void _load() {
+    _isLoaded = true;
     _rxnValue.value = get();
   }
 
@@ -36,6 +38,9 @@ class RxnPreferenceItem<T, R extends Rxn<T>> extends NullablePreferenceItem<T> {
   }
 
   R get rx {
+    if(!_isLoaded){
+      _load();
+    }
     return _rxnValue;
   }
 
