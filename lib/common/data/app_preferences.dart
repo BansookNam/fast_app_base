@@ -1,5 +1,6 @@
 import 'package:fast_app_base/common/theme/custom_theme.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {
@@ -43,7 +44,7 @@ class AppPreferences {
     return _prefs.remove(key);
   }
 
-  static T? getValue<T>(PreferenceItem<T> item) {
+  static T getValue<T>(PreferenceItem<T> item) {
     final String key = getPrefKey(item);
     switch (T) {
       case int:
@@ -76,20 +77,81 @@ class AppPreferences {
 }
 
 class PreferenceItem<T> {
-  final T? defaultValue;
+  final T defaultValue;
   final String key;
 
-  PreferenceItem(this.key, [this.defaultValue]);
+  PreferenceItem(this.key, this.defaultValue);
 
-  void call(T? value) {
+  void call(T value) {
     AppPreferences.setValue<T>(this, value);
   }
 
-  void set(T? value) {
-    AppPreferences.setValue<T>(this, value);
+  Future<bool> set(T value) {
+    return AppPreferences.setValue<T>(this, value);
   }
 
-  T? get() {
+  T get() {
     return AppPreferences.getValue<T>(this);
+  }
+
+  Future<bool> delete() {
+    return AppPreferences.deleteValue<T>(this);
+  }
+}
+
+class NullablePreferenceItem<T> extends PreferenceItem<T?> {
+  NullablePreferenceItem(String key, T? defaultValue) : super(key, defaultValue);
+}
+
+class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
+  final R rxValue;
+
+  RxPreferenceItem(String key, T defaultValue)
+      : rxValue = createRxValue<T, R>(defaultValue),
+        super(key, defaultValue);
+
+  @override
+  void call(T value) {
+    rxValue.value = value;
+    super.call(value);
+  }
+
+  @override
+  Future<bool> set(T value) {
+    rxValue.value = value;
+    return super.set(value);
+  }
+
+  @override
+  T get() {
+    return AppPreferences.getValue<T>(this);
+  }
+
+  R getRx() {
+    return rxValue;
+  }
+
+  R get rx {
+    return rxValue;
+  }
+
+  @override
+  Future<bool> delete() {
+    return AppPreferences.deleteValue<T>(this);
+  }
+
+  static R createRxValue<T, R extends Rx<T>>(T defaultValue) {
+    switch (T) {
+      case int:
+        return RxInt(defaultValue as int) as R;
+      case double:
+        return RxDouble(defaultValue as double) as R;
+      case bool:
+        return RxBool(defaultValue as bool) as R;
+      case String:
+        return RxString(defaultValue as String) as R;
+      default:
+        return Rx<T>(defaultValue) as R;
+    }
   }
 }
