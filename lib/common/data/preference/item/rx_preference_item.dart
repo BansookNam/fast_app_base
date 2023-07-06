@@ -30,19 +30,19 @@ class RxPreferenceItem<T, R extends Rx<T>> extends PreferenceItem<T> {
 
   @override
   T get() {
-    return AppPreferences.getValue<T>(this);
+    if(!_isLoaded){
+      _load();
+    }
+    final value =  AppPreferences.getValue<T>(this);
+    if(_rxValue.value!=value){
+      _rxValue.value = value;
+    }
+    return _rxValue.value;
   }
 
   @override
   Future<bool> delete() {
     return AppPreferences.deleteValue<T>(this);
-  }
-
-  R get rx {
-    if(!_isLoaded){
-      _load();
-    }
-    return _rxValue;
   }
 
   static R createRxValue<T, R extends Rx<T>>(T defaultValue) {

@@ -29,19 +29,19 @@ class RxnPreferenceItem<T, R extends Rxn<T>> extends NullablePreferenceItem<T> {
 
   @override
   T? get() {
-    return AppPreferences.getValue<T?>(this);
+    if (!_isLoaded) {
+      _load();
+    }
+    final value = AppPreferences.getValue<T?>(this);
+    if (_rxnValue.value != value) {
+      _rxnValue.value = value;
+    }
+    return _rxnValue.value;
   }
 
   @override
   Future<bool> delete() {
     return AppPreferences.deleteValue<T?>(this);
-  }
-
-  R get rx {
-    if(!_isLoaded){
-      _load();
-    }
-    return _rxnValue;
   }
 
   static R createRxnValue<T, R extends Rxn<T>>([T? defaultValue]) {
