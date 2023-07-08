@@ -11,7 +11,7 @@ class AppPreferences {
   static const String prefix = 'AppPreference.';
 
   static late final SharedPreferences _prefs;
-
+  
   static String getPrefKey(PreferenceItem item) {
     return '${AppPreferences.prefix}${item.key}';
   }
@@ -21,27 +21,54 @@ class AppPreferences {
     return;
   }
 
+  static bool checkIsNullable<T>() => null is T;
+
   static Future<bool> setValue<T>(PreferenceItem<T> item, T? value) async {
     final String key = getPrefKey(item);
-    switch (T) {
-      case int:
-        return _prefs.setInt(key, value as int);
-      case String:
-        return _prefs.setString(key, value as String);
-      case double:
-        return _prefs.setDouble(key, value as double);
-      case bool:
-        return _prefs.setBool(key, value as bool);
-      case const (List<String>):
-        return _prefs.setStringList(key, value as List<String>);
-      case DateTime:
-        return _prefs.setString(key, (value as DateTime).toIso8601String());
-      default:
-        if (value is Enum) {
-          return _prefs.setString(key, describeEnum(value));
-        } else {
-          throw Exception('$T 타입에 대한 저장 transform 함수를 추가 해주세요.');
-        }
+    final isNullable = checkIsNullable<T>();
+
+    if (isNullable) {
+      switch (T.toString()) {
+        case "int?":
+          return _prefs.setInt(key, value as int);
+        case "String?":
+          return _prefs.setString(key, value as String);
+        case "double?":
+          return _prefs.setDouble(key, value as double);
+        case "bool?":
+          return _prefs.setBool(key, value as bool);
+        case "List<String>?":
+          return _prefs.setStringList(key, value as List<String>);
+        case "DateTime?":
+          return _prefs.setString(key, (value as DateTime).toIso8601String());
+        default:
+          if (value is Enum) {
+            return _prefs.setString(key, describeEnum(value));
+          } else {
+            throw Exception('$T 타입에 대한 저장 transform 함수를 추가 해주세요.');
+          }
+      }
+    } else {
+      switch (T) {
+        case int:
+          return _prefs.setInt(key, value as int);
+        case String:
+          return _prefs.setString(key, value as String);
+        case double:
+          return _prefs.setDouble(key, value as double);
+        case bool:
+          return _prefs.setBool(key, value as bool);
+        case const (List<String>):
+          return _prefs.setStringList(key, value as List<String>);
+        case DateTime:
+          return _prefs.setString(key, (value as DateTime).toIso8601String());
+        default:
+          if (value is Enum) {
+            return _prefs.setString(key, describeEnum(value));
+          } else {
+            throw Exception('$T 타입에 대한 저장 transform 함수를 추가 해주세요.');
+          }
+      }
     }
   }
 
@@ -73,13 +100,25 @@ class AppPreferences {
       return null;
     }
 
-    switch (t) {
-      case CustomTheme:
-        return CustomTheme.values.asNameMap()[value] as T?;
-      case DateTime:
-        return DateTime.parse(value) as T?;
-      default:
-        throw Exception('$t 타입에 대한 transform 함수를 추가 해주세요.');
+    bool isNullableType = checkIsNullable<T>();
+    if (isNullableType) {
+      switch (t.toString()) {
+        case "CustomTheme?":
+          return CustomTheme.values.asNameMap()[value] as T?;
+        case "DateTime?":
+          return DateTime.parse(value) as T?;
+        default:
+          throw Exception('$t 타입에 대한 transform 함수를 추가 해주세요.');
+      }
+    } else {
+      switch (t) {
+        case CustomTheme:
+          return CustomTheme.values.asNameMap()[value] as T?;
+        case DateTime:
+          return DateTime.parse(value) as T?;
+        default:
+          throw Exception('$t 타입에 대한 transform 함수를 추가 해주세요.');
+      }
     }
   }
 }
