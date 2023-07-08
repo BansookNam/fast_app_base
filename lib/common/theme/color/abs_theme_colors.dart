@@ -6,6 +6,8 @@ export 'package:fast_app_base/common/constant/app_colors.dart';
 typedef ColorProvider = Color Function();
 
 abstract class AbstractThemeColors {
+  const AbstractThemeColors();
+
   Color get veryBrightGrey => AppColors.brightGrey;
 
   Color get drawerBg => const Color.fromARGB(255, 255, 255, 255);

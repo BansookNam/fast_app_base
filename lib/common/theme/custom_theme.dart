@@ -6,28 +6,19 @@ import 'package:fast_app_base/common/theme/shadows/light_app_shadows.dart';
 import 'package:flutter/material.dart';
 
 enum CustomTheme {
-  dark,
-  light;
+  dark(
+    DarkAppColors(),
+    DarkAppShadows(),
+  ),
+  light(
+    LightAppColors(),
+    LightAppShadows(),
+  );
 
-  static MaterialColor primarySwatchColor = Colors.lightBlue;
+  const CustomTheme(this.appColors, this.appShadows);
 
-  AbstractThemeColors get appColors {
-    switch (this) {
-      case CustomTheme.dark:
-        return DarkAppColors();
-      case CustomTheme.light:
-        return LightAppColors();
-    }
-  }
-
-  AbsThemeShadows get appShadows {
-    switch (this) {
-      case CustomTheme.dark:
-        return DarkAppShadows();
-      case CustomTheme.light:
-        return LightAppShadows();
-    }
-  }
+  final AbstractThemeColors appColors;
+  final AbsThemeShadows appShadows;
 
   ThemeData get themeData {
     switch (this) {
@@ -37,23 +28,25 @@ enum CustomTheme {
         return lightTheme;
     }
   }
-
-  static ThemeData lightTheme = ThemeData(
-      primarySwatch: primarySwatchColor,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      brightness: Brightness.light,
-      // textTheme: GoogleFonts.singleDayTextTheme(
-      //   ThemeData(brightness: Brightness.light).textTheme,
-      // ),
-      colorScheme: const ColorScheme.light(background: Colors.white));
-
-  static ThemeData darkTheme = ThemeData(
-      primarySwatch: primarySwatchColor,
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      brightness: Brightness.dark,
-      scaffoldBackgroundColor: AppColors.veryDarkGrey,
-      // textTheme: GoogleFonts.nanumMyeongjoTextTheme(
-      //   ThemeData(brightness: Brightness.dark).textTheme,
-      // ),
-      colorScheme: const ColorScheme.dark(background: AppColors.veryDarkGrey));
 }
+
+MaterialColor primarySwatchColor = Colors.lightBlue;
+
+ThemeData lightTheme = ThemeData(
+    primarySwatch: primarySwatchColor,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    brightness: Brightness.light,
+    // textTheme: GoogleFonts.singleDayTextTheme(
+    //   ThemeData(brightness: Brightness.light).textTheme,
+    // ),
+    colorScheme: const ColorScheme.light(background: Colors.white));
+
+ThemeData darkTheme = ThemeData(
+    primarySwatch: primarySwatchColor,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    brightness: Brightness.dark,
+    scaffoldBackgroundColor: AppColors.veryDarkGrey,
+    // textTheme: GoogleFonts.nanumMyeongjoTextTheme(
+    //   ThemeData(brightness: Brightness.dark).textTheme,
+    // ),
+    colorScheme: const ColorScheme.dark(background: AppColors.veryDarkGrey));
