@@ -30,23 +30,23 @@ enum CustomTheme {
   }
 }
 
-MaterialColor primarySwatchColor = Colors.lightBlue;
-
 ThemeData lightTheme = ThemeData(
-    primarySwatch: primarySwatchColor,
+    useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
     // textTheme: GoogleFonts.singleDayTextTheme(
     //   ThemeData(brightness: Brightness.light).textTheme,
     // ),
-    colorScheme: const ColorScheme.light(background: Colors.white));
+    colorScheme: ColorScheme.fromSeed(seedColor: CustomTheme.light.appColors.seedColor));
 
+const darkColorSeed = Color(0xbcd5ff7e);
 ThemeData darkTheme = ThemeData(
-    primarySwatch: primarySwatchColor,
+    useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.veryDarkGrey,
     // textTheme: GoogleFonts.nanumMyeongjoTextTheme(
     //   ThemeData(brightness: Brightness.dark).textTheme,
     // ),
-    colorScheme: const ColorScheme.dark(background: AppColors.veryDarkGrey));
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: CustomTheme.dark.appColors.seedColor, brightness: Brightness.dark));
