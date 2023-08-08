@@ -34,7 +34,7 @@ ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
-    // textTheme: GoogleFonts.singleDayTextTheme(
+    // textTheme: CustomGoogleFonts.diphylleiaTextTheme(
     //   ThemeData(brightness: Brightness.light).textTheme,
     // ),
     colorScheme: ColorScheme.fromSeed(seedColor: CustomTheme.light.appColors.seedColor));
