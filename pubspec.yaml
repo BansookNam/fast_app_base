@@ -110,8 +110,14 @@ flutter:
     - assets/image/
     - assets/image/icon/
     - assets/image/flag/
+    - assets/image/splash/
     - assets/image/darkmode/
+    - assets/image/bank/
+    - assets/image/stock/
+    - assets/image/credit_card/
+    - assets/image/illustration/
     - assets/translations/
+    - assets/json/
     - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
