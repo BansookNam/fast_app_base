@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 extension AsyncExt on Object {
-  Timer delay(Function func, {int milliseconds = 300}) {
+  Timer delay(Function func, Duration ms, {int milliseconds = 300}) {
     return Timer(Duration(milliseconds: milliseconds), () {
       if (this is State && !(this as State).mounted) {
         return;
