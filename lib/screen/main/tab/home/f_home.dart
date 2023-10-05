@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import '../../../../common/widget/w_big_button.dart';
 import '../../../dialog/d_color_bottom.dart';
 import '../../../dialog/d_confirm.dart';
+import '../../s_main.dart';
 
 class HomeFragment extends StatelessWidget {
   const HomeFragment({
@@ -24,28 +25,35 @@ class HomeFragment extends StatelessWidget {
       color: Colors.black,
       child: Stack(
         children: [
-          SingleChildScrollView(
-            padding: EdgeInsets.only(top: 60),
-            child: Column(
-              children: [
-                BigButton(
-                  "토스뱅크",
-                  onTap: () {
-                    context.showSnackbar("토스뱅크를 눌렀어요.");
-                  },
-                ),
-                height10,
-                RoundedContainer(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    "자산".text.bold.white.make(),
-                    height5,
-                    ...bankAccounts.map((e) => BankAccountWidget(e)).toList(),
-                  ],
-                )),
-              ],
-            ).pSymmetric(h: 20),
+          RefreshIndicator(
+            edgeOffset: TossAppBar.appBarHeight,
+            onRefresh: () async{
+              await sleepAsync(500.ms as int);
+            },
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(
+                  top: TossAppBar.appBarHeight, bottom: MainScreenState.bottomNavigatorHeight),
+              child: Column(
+                children: [
+                  BigButton(
+                    "토스뱅크",
+                    onTap: () {
+                      context.showSnackbar("토스뱅크를 눌렀어요.");
+                    },
+                  ),
+                  height10,
+                  RoundedContainer(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      "자산".text.bold.white.make(),
+                      height5,
+                      ...bankAccounts.map((e) => BankAccountWidget(e)).toList(),
+                    ],
+                  )),
+                ],
+              ).pSymmetric(h: 20),
+            ),
           ),
           const TossAppBar()
         ],
