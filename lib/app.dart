@@ -7,6 +7,7 @@ import 'common/theme/custom_theme.dart';
 
 class App extends StatefulWidget {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
   ///light, dark 테마가 준비되었고, 시스템 테마를 따라가게 하려면 해당 필드를 제거 하시면 됩니다.
   static const defaultTheme = CustomTheme.light;
   static bool isForeground = true;
@@ -62,6 +63,9 @@ class AppState extends State<App> with Nav, WidgetsBindingObserver {
         App.isForeground = false;
         break;
       case AppLifecycleState.detached:
+        break;
+      case AppLifecycleState.hidden:
+        // iOS에 대한 특별한 처리
         break;
     }
     super.didChangeAppLifecycleState(state);
