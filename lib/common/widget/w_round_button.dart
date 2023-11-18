@@ -142,7 +142,7 @@ class RoundButtonState extends State<RoundButton> with RefreshEverySecond {
             height: widget.height,
             decoration: BoxDecoration(
               color: color,
-              borderRadius: BorderRadius.circular(widget.height / 2),
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? widget.height / 2),
               border: Border.all(width: 1, color: borderColor),
               shape: BoxShape.rectangle,
               boxShadow: [

@@ -1,4 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -9,7 +10,6 @@ import '../../../screen/dialog/d_message.dart';
 import '../../common/common.dart';
 import '../../common/language/language.dart';
 import '../../common/theme/theme_util.dart';
-import '../../common/widget/w_empty_expanded.dart';
 import '../../common/widget/w_mode_switch.dart';
 
 class MenuDrawer extends StatefulWidget {
@@ -91,7 +91,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
           _MenuWidget(
             'opensource'.tr(),
             onTap: () async {
-              MessageDialog('opensource'.tr()).show();
+              Nav.push(const OpensourceScreen());
             },
           ),
           const Line(),

@@ -1,6 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/widget/round_button_theme.dart';
-import 'package:fast_app_base/common/widget/w_empty_expanded.dart';
 import 'package:fast_app_base/common/widget/w_round_button.dart';
 import 'package:fast_app_base/screen/dialog/d_message.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +15,7 @@ class HomeFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green.withOpacity(0.2),
+      color: context.appColors.seedColor.getMaterialColorValues[100],
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

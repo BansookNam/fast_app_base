@@ -9,7 +9,7 @@ import 'dart:io';
 
 import 'package:fast_app_base/app.dart';
 import 'package:fast_app_base/common/common.dart';
-import 'package:fast_app_base/common/data/app_preferences.dart';
+import 'package:fast_app_base/common/data/preference/app_preferences.dart';
 import 'package:fast_app_base/common/language/language.dart';
 import 'package:fast_app_base/common/theme/custom_theme.dart';
 import 'package:flutter/material.dart';

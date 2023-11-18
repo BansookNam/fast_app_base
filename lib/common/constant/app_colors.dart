@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  static const Color veryDarkGrey = Color.fromARGB(255, 18, 18, 18);
   static const Color darkGrey = Color.fromARGB(255, 45, 45, 45);
   static const Color grey = Color.fromARGB(255, 139, 139, 139);
   static const Color middleGrey = Color.fromARGB(255, 171, 171, 171);
