@@ -33,8 +33,9 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _handleBackPressed,
+    return PopScope(
+      canPop: isRootPage,
+      onPopInvoked: _handleBackPressed,
       child: Scaffold(
         extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
         drawer: const MenuDrawer(),
@@ -51,6 +52,9 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     );
   }
 
+  bool get isRootPage =>
+      _currentTab == TabItem.home && _currentTabNavigationKey.currentState?.canPop() == false;
+
   IndexedStack get pages => IndexedStack(
       index: _currentIndex,
       children: tabs
@@ -63,17 +67,17 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
               ))
           .toList());
 
-  Future<bool> _handleBackPressed() async {
-    final isFirstRouteInCurrentTab =
-        (await _currentTabNavigationKey.currentState?.maybePop() == false);
-    if (isFirstRouteInCurrentTab) {
+  void _handleBackPressed(bool didPop) {
+    if (!didPop) {
+      if (_currentTabNavigationKey.currentState?.canPop() == true) {
+        Nav.pop(_currentTabNavigationKey.currentContext!);
+        return;
+      }
+
       if (_currentTab != TabItem.home) {
         _changeTab(tabs.indexOf(TabItem.home));
-        return false;
       }
     }
-    // maybePop 가능하면 나가지 않는다.
-    return isFirstRouteInCurrentTab;
   }
 
   Widget _buildBottomNavigationBar(BuildContext context) {
