@@ -69,6 +69,7 @@ dependencies:
   keyboard_utils_fork:
     git:
       url: https://github.com/BansookNam/keyboard_utils
+      ref: version/flutter_3.29.2
 
   #network
   dio: ^5.0.0

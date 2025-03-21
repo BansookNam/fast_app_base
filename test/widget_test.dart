@@ -14,7 +14,6 @@ import 'package:fast_app_base/common/language/language.dart';
 import 'package:fast_app_base/common/theme/custom_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:isar/isar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -22,7 +21,6 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
     HttpOverrides.global = null;
-    await Isar.initializeIsarCore(download: true);
     await EasyLocalization.ensureInitialized();
     await AppPreferences.init();
   });

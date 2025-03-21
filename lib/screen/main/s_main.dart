@@ -35,7 +35,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return PopScope(
       canPop: isRootPage,
-      onPopInvoked: _handleBackPressed,
+      onPopInvokedWithResult: _handleBackPressed,
       child: Scaffold(
         extendBody: extendBody, //bottomNavigationBar 아래 영역 까지 그림
         drawer: const MenuDrawer(),
@@ -67,7 +67,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
               ))
           .toList());
 
-  void _handleBackPressed(bool didPop) {
+  void _handleBackPressed(bool didPop, result) {
     if (!didPop) {
       if (_currentTabNavigationKey.currentState?.canPop() == true) {
         Nav.pop(_currentTabNavigationKey.currentContext!);
