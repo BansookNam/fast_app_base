@@ -40,10 +40,7 @@ dependencies:
   equatable: ^2.0.5
 
   #util
-  velocity_x:
-    git:
-      url: https://github.com/BansookNam/velocityx_fork.git
-      ref: version/flutter_3.29
+  velocity_x: ^4.3.1
 
   #data
   shared_preferences: ^2.0.15
