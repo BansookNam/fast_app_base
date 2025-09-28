@@ -1,8 +1,7 @@
 name: fast_app_base
 description: A new Flutter project.
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+homepage: http://bansooknam.github.io/
+repository: https://github.com/BansookNam/fast_app_base
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -74,6 +73,13 @@ dependencies:
   freezed: ^2.3.4
   freezed_annotation: ^2.2.0
   json_annotation: ^4.8.0
+
+  # command-line
+  args: ^2.4.2
+  path: ^1.8.3
+
+executables:
+  fast_app_base: 
 
 dev_dependencies:
   flutter_test:

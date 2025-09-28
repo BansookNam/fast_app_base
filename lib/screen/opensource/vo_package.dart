@@ -18,9 +18,9 @@ class Package with _$Package{
     required List<String> authors,
     required String version,
     String? license,
-    required bool isMarkdown,
-    required bool isSdk,
-    required bool isDirectDependency,
+    @Default(false) bool isMarkdown,
+    @Default(false) bool isSdk,
+    @Default(false) bool isDirectDependency,
   }) = _Package;
 
   factory Package.fromJson(Map<String, Object?> json)=> _$PackageFromJson(json);
