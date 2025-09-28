@@ -1,5 +1,5 @@
 name: fast_app_base
-description: A new Flutter project.
+description: Kickstart your Flutter app with fast_app_base — a ready-to-use foundation offering theme, routing, internationalization, dialogs, and Snackbar support out of the box.
 homepage: http://bansooknam.github.io/
 repository: https://github.com/BansookNam/fast_app_base
 
@@ -15,7 +15,7 @@ repository: https://github.com/BansookNam/fast_app_base
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -62,10 +62,7 @@ dependencies:
   cached_network_image: ^3.2.3
 
   #ui - util
-  keyboard_utils_fork:
-    git:
-      url: https://github.com/BansookNam/keyboard_utils
-      ref: version/flutter_3.29.2
+  keyboard_utils_plugin: ^1.1.0
 
   #network
   dio: ^5.0.0
