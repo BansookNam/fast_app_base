@@ -106,15 +106,17 @@ class TemplateCreator {
       'name: $projectName',
     );
 
-    final fieldsToRemove = [
-      'homepage',
-      'repository',
-      'executables',
-    ];
+    content = content.replaceAll(
+      RegExp(r'(?ms)^\s*executables:\s*\n(?:[ \t]+.*\n?)*'),
+      '',
+    );
 
-    for (var field in fieldsToRemove) {
-      content = content.replaceAll(RegExp('^' + field + r':(.|\s)*?^(\w+)', multiLine: true), '');
-    }
+    content = content.replaceAll(
+      RegExp(r'(?m)^\s*(homepage|repository):[^\n]*\n?'),
+      '',
+    );
+
+    content = content.replaceAll('https://github.com/BansookNam/fast_app_base', '');
 
     content = content.replaceAll(RegExp(r'\n\n+'), '\n\n');
 
