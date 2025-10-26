@@ -41,6 +41,9 @@ class TemplateCreator {
 
     print('Updating project name...');
     await _updatePubspec();
+
+    print('Rewriting package imports...');
+    await _rewritePackageReferences();
   }
 
   Future<void> _copyTemplate() async {
@@ -110,16 +113,13 @@ class TemplateCreator {
       'DerivedData',
     };
 
-    await for (final entity in source.list(recursive: false, followLinks: false)) {
+    await for (final entity
+        in source.list(recursive: false, followLinks: false)) {
       try {
         final base = p.basename(entity.path);
         // Skip symlinks entirely
         final type = FileSystemEntity.typeSync(entity.path, followLinks: false);
         if (type == FileSystemEntityType.link) {
-          continue;
-        }
-        // Skip Xcode workspace/project bundles to avoid cycles
-        if (base.endsWith('.xcworkspace') || base.endsWith('.xcodeproj')) {
           continue;
         }
         // Skip ignored directories/files at any depth
@@ -154,7 +154,8 @@ class TemplateCreator {
     );
 
     content = content.replaceAll(
-      RegExp(r'^\s*executables:\s*\n(?:[ \t]+.*\n?)*', multiLine: true, dotAll: true),
+      RegExp(r'^\s*executables:\s*\n(?:[ \t]+.*\n?)*',
+          multiLine: true, dotAll: true),
       '',
     );
 
@@ -166,8 +167,65 @@ class TemplateCreator {
     content =
         content.replaceAll('https://github.com/BansookNam/fast_app_base', '');
 
+    // Remove command-line dependencies and their comment from dependencies
+    content = content.replaceAll(
+      RegExp(r'^\s*#\s*command-line[^\n]*\n?', multiLine: true),
+      '',
+    );
+    content = content.replaceAll(
+      RegExp(r'^\s{2}args:\s*[^\n]*\n?', multiLine: true),
+      '',
+    );
+    content = content.replaceAll(
+      RegExp(r'^\s{2}path:\s*[^\n]*\n?', multiLine: true),
+      '',
+    );
+
+    // Ensure flutter assets block exists (always enforce desired block)
+    const assetsBlock = '  uses-material-design: true\n'
+        '  assets:\n'
+        '    - assets/json/\n'
+        '    - assets/image/\n'
+        '    - assets/image/icon/\n'
+        '    - assets/image/flag/\n'
+        '    - assets/image/darkmode/\n'
+        '    - assets/translations/\n'
+        '    - assets/\n';
+
+    final flutterSectionRegex =
+        RegExp(r'^flutter:\s*\n(?:^[ \t].*\n?)*', multiLine: true);
+    if (flutterSectionRegex.hasMatch(content)) {
+      content = content.replaceFirst(
+        flutterSectionRegex,
+        'flutter:\n\n$assetsBlock',
+      );
+    } else {
+      content = content.trimRight() + '\n\nflutter:\n\n' + assetsBlock;
+    }
+
     content = content.replaceAll(RegExp(r'\n\n+'), '\n\n');
 
     await pubspecFile.writeAsString(content);
+  }
+
+  Future<void> _rewritePackageReferences() async {
+    final exts = {'.dart', '.yaml', '.yml'};
+    await for (final entity
+        in _projectDir.list(recursive: true, followLinks: false)) {
+      if (entity is! File) continue;
+      final ext = p.extension(entity.path).toLowerCase();
+      if (!exts.contains(ext)) continue;
+      try {
+        var content = await entity.readAsString();
+        final updated = content
+            .replaceAll('package:fast_app_base/', 'package:$projectName/')
+            .replaceAll("package:fast_app_base'", "package:$projectName'");
+        if (!identical(content, updated) && content != updated) {
+          await entity.writeAsString(updated);
+        }
+      } catch (_) {
+        continue;
+      }
+    }
   }
 }

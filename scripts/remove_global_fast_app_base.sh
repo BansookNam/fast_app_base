@@ -79,3 +79,7 @@ rm -f .dart_tool/pub/bin/fast_app_base/fast_app_base.dart-3.9.2.snapshot
 echo "Done. Verify with:"
 echo "  dart pub global list | grep $PKG || true"
 echo "  which fast_app_base || echo 'no fast_app_base on PATH'"
+
+dart pub global deactivate fast_app_base || true
+./scripts/remove_global_fast_app_base.sh --yes
+dart pub global activate --source path /Users/nam/fastcampus_flutter/fast_app_base --overwrite

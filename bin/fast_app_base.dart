@@ -4,7 +4,7 @@ import 'package:fast_app_base/src/template_creator.dart';
 import 'dart:io';
 import 'dart:isolate';
 
-const String kVersion = '0.0.1+4';
+const String kVersion = '0.0.1+9';
 
 void main(List<String> arguments) async {
   final parser = ArgParser()
@@ -78,30 +78,31 @@ void main(List<String> arguments) async {
 }
 
 Future<String> _resolveVersion() async {
-  try {
-    // Resolve a concrete file within the package to ensure resolution works in global activation.
-    final uri = await Isolate.resolvePackageUri(
-        Uri.parse('package:fast_app_base/src/template_creator.dart'));
-    if (uri == null) {
-      return kVersion;
-    }
-    final libFile = File.fromUri(uri);
-    final libDir = libFile.parent; // .../lib/src
-    final rootDir = libDir.parent.parent; // package root
-    final pubspec = File('${rootDir.path}/pubspec.yaml');
-    if (!await pubspec.exists()) {
-      return kVersion;
-    }
-    final content = await pubspec.readAsString();
-    final match =
-        RegExp(r'^version:\s*([^\s#]+)', multiLine: true).firstMatch(content);
-    if (match == null) {
-      print('uri is null 3');
-      return kVersion;
-    }
-    return match.group(1)!;
-  } catch (_) {
-    print('uri is null 4');
-    return kVersion;
-  }
+  return kVersion;
+  // try {
+  //   // Resolve a concrete file within the package to ensure resolution works in global activation.
+  //   final uri = await Isolate.resolvePackageUri(
+  //       Uri.parse('package:fast_app_base/src/template_creator.dart'));
+  //   if (uri == null) {
+  //     return kVersion;
+  //   }
+  //   final libFile = File.fromUri(uri);
+  //   final libDir = libFile.parent; // .../lib/src
+  //   final rootDir = libDir.parent.parent; // package root
+  //   final pubspec = File('${rootDir.path}/pubspec.yaml');
+  //   if (!await pubspec.exists()) {
+  //     return kVersion;
+  //   }
+  //   final content = await pubspec.readAsString();
+  //   final match =
+  //       RegExp(r'^version:\s*([^\s#]+)', multiLine: true).firstMatch(content);
+  //   if (match == null) {
+  //     print('uri is null 3');
+  //     return kVersion;
+  //   }
+  //   return match.group(1)!;
+  // } catch (_) {
+  //   print('uri is null 4');
+  //   return kVersion;
+  // }
 }
