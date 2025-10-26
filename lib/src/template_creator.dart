@@ -3,10 +3,11 @@ import 'package:path/path.dart' as p;
 
 class TemplateCreator {
   final String projectName;
+  final Set<String> platforms;
   late final Directory _projectDir;
   late final Directory _templateDir;
 
-  TemplateCreator(this.projectName) {
+  TemplateCreator(this.projectName, this.platforms) {
     _projectDir = Directory(p.join(Directory.current.path, projectName));
     _templateDir = _findTemplateDirectory();
   }
@@ -44,23 +45,34 @@ class TemplateCreator {
 
   Future<void> _copyTemplate() async {
     final entities = await _templateDir.list(recursive: false).toList();
-    final ignoreList = [
-      '.git',
-      '.dart_tool',
-      '.idea',
-      'build',
-      'pubspec.lock',
-      'bin',
-      'LICENSE',
-      'README.md',
-      'my_new_app'
-    ];
+    // Only copy the items needed for the application scaffold
+    final allowList = <String>{
+      'lib',
+      'assets',
+      'analysis_options.yaml',
+      'pubspec.yaml',
+      'flutter_native_splash.yaml',
+    };
+
+    if (platforms.contains('android')) {
+      allowList.add('android');
+    }
+    if (platforms.contains('ios')) {
+      allowList.add('ios');
+    }
+    if (platforms.contains('macos')) {
+      allowList.add('macos');
+    }
+    if (platforms.contains('web')) {
+      allowList.add('web');
+    }
 
     for (final entity in entities) {
-      if (ignoreList.contains(p.basename(entity.path))) {
+      final base = p.basename(entity.path);
+      if (!allowList.contains(base)) {
         continue;
       }
-      final newPath = p.join(_projectDir.path, p.basename(entity.path));
+      final newPath = p.join(_projectDir.path, base);
       if (entity is File) {
         await entity.copy(newPath);
       } else if (entity is Directory) {
@@ -83,12 +95,47 @@ class TemplateCreator {
 
     await destination.create(recursive: true);
 
-    await for (final entity in source.list(recursive: false)) {
-      final newPath = p.join(destination.path, p.basename(entity.path));
-      if (entity is File) {
-        await entity.copy(newPath);
-      } else if (entity is Directory) {
-        await _copyDirectory(entity, Directory(newPath), visited: visited);
+    // Directories to ignore at any depth
+    const nestedIgnore = {
+      '.git',
+      '.dart_tool',
+      'build',
+      '.idea',
+      '.gradle',
+      'ios',
+      'macos',
+      'android',
+      'windows',
+      'linux',
+      'DerivedData',
+    };
+
+    await for (final entity in source.list(recursive: false, followLinks: false)) {
+      try {
+        final base = p.basename(entity.path);
+        // Skip symlinks entirely
+        final type = FileSystemEntity.typeSync(entity.path, followLinks: false);
+        if (type == FileSystemEntityType.link) {
+          continue;
+        }
+        // Skip Xcode workspace/project bundles to avoid cycles
+        if (base.endsWith('.xcworkspace') || base.endsWith('.xcodeproj')) {
+          continue;
+        }
+        // Skip ignored directories/files at any depth
+        if (nestedIgnore.contains(base)) {
+          continue;
+        }
+
+        final newPath = p.join(destination.path, base);
+        if (entity is File) {
+          await entity.copy(newPath);
+        } else if (entity is Directory) {
+          await _copyDirectory(entity, Directory(newPath), visited: visited);
+        }
+      } catch (_) {
+        // Ignore items that cannot be read/copied
+        continue;
       }
     }
   }
@@ -107,16 +154,17 @@ class TemplateCreator {
     );
 
     content = content.replaceAll(
-      RegExp(r'(?ms)^\s*executables:\s*\n(?:[ \t]+.*\n?)*'),
+      RegExp(r'^\s*executables:\s*\n(?:[ \t]+.*\n?)*', multiLine: true, dotAll: true),
       '',
     );
 
     content = content.replaceAll(
-      RegExp(r'(?m)^\s*(homepage|repository):[^\n]*\n?'),
+      RegExp(r'^\s*(homepage|repository):[^\n]*\n?', multiLine: true),
       '',
     );
 
-    content = content.replaceAll('https://github.com/BansookNam/fast_app_base', '');
+    content =
+        content.replaceAll('https://github.com/BansookNam/fast_app_base', '');
 
     content = content.replaceAll(RegExp(r'\n\n+'), '\n\n');
 
