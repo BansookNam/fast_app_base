@@ -5,7 +5,7 @@ import 'package:fast_app_base/src/template_creator.dart';
 
 import 'dart:io';
 
-const String kVersion = '0.0.1+9';
+const String kVersion = '0.0.1+10';
 
 void main(List<String> arguments) async {
   final parser = ArgParser()
