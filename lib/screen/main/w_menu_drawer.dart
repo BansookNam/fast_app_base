@@ -1,6 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get_utils/src/extensions/string_extensions.dart';
@@ -44,9 +43,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
               width: 240,
               padding: const EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
-                  color: context.colors.background),
+                  borderRadius: const BorderRadius.only(topRight: Radius.circular(5), bottomRight: Radius.circular(5)),
+                  color: context.colors.surface),
               child: isSmallScreen(context)
                   ? SingleChildScrollView(
                       child: getMenus(context),
@@ -59,8 +57,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
     );
   }
 
-  bool isSmallScreen(BuildContext context) =>
-      context.deviceHeight < MenuDrawer.minHeightForScrollView;
+  bool isSmallScreen(BuildContext context) => context.deviceHeight < MenuDrawer.minHeightForScrollView;
 
   Container getMenus(BuildContext context) {
     return Container(
@@ -132,10 +129,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       height: 30,
                       width: 100,
                       padding: const EdgeInsets.only(left: 15),
-                      child: '© 2023. Bansook Nam. all rights reserved.'
-                          .selectableText
-                          .size(10)
-                          .makeWithDefaultFont()),
+                      child: '© 2023. Bansook Nam. all rights reserved.'.selectableText.size(10).makeWithDefaultFont()),
                   onTap: () async {},
                 ),
               ),
@@ -182,7 +176,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                         }
                         await context.setLocale(Language.find(value.toLowerCase()).locale);
                       },
-                      value: describeEnum(currentLanguage).capitalizeFirst,
+                      value: currentLanguage.name.capitalizeFirst,
                       underline: const SizedBox.shrink(),
                       elevation: 1,
                       borderRadius: BorderRadius.circular(10),
@@ -196,14 +190,12 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   DropdownMenuItem<String> menu(Language language) {
     return DropdownMenuItem(
-      value: describeEnum(language).capitalizeFirst,
+      value: language.name.capitalizeFirst,
       child: Row(
         children: [
           flag(language.flagPath),
           const Width(8),
-          describeEnum(language)
-              .capitalizeFirst!
-              .text
+          language.name.capitalizeFirst!.text
               .color(Theme.of(context).textTheme.bodyLarge?.color)
               .size(12)
               .makeWithDefaultFont(),
@@ -247,11 +239,7 @@ class _MenuWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                  child: text.text
-                      .textStyle(defaultFontStyle())
-                      .color(context.appColors.drawerText)
-                      .size(15)
-                      .make()),
+                  child: text.text.textStyle(defaultFontStyle()).color(context.appColors.drawerText).size(15).make()),
             ],
           ),
         ),

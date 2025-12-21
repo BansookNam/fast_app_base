@@ -23,7 +23,7 @@ class FavoriteFragment extends StatelessWidget {
             if (isShowBackButton) const BackButton(),
             Expanded(
               child: Container(
-                color: Colors.green.withOpacity(0.2),
+                color: Colors.green.withValues(alpha: 0.2),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -31,8 +31,7 @@ class FavoriteFragment extends StatelessWidget {
                       const Row(),
                       RoundButton(
                         text: '즐겨찾기 화면 띄우기',
-                        onTap: () => Nav.push(const FavoriteFragment(isShowBackButton: true),
-                            context: context),
+                        onTap: () => Nav.push(const FavoriteFragment(isShowBackButton: true), context: context),
                         theme: RoundButtonTheme.blue,
                       ),
                     ]),

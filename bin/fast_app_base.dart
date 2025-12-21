@@ -1,8 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:args/args.dart';
 import 'package:fast_app_base/src/template_creator.dart';
 
 import 'dart:io';
-import 'dart:isolate';
 
 const String kVersion = '0.0.1+9';
 
@@ -17,7 +18,7 @@ void main(List<String> arguments) async {
     return;
   }
 
-  Future<Set<String>> _selectPlatforms() async {
+  Future<Set<String>> selectPlatforms() async {
     final options = <String>[
       'Mobile only (Android + iOS)',
       'Desktop only (macOS)',
@@ -68,7 +69,7 @@ void main(List<String> arguments) async {
         'Examples: my_app, my_app2');
     exit(64);
   }
-  final platforms = await _selectPlatforms();
+  final platforms = await selectPlatforms();
   print('Creating a new project named "$projectName"...');
 
   final creator = TemplateCreator(projectName, platforms);

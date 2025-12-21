@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:path/path.dart' as p;
 
@@ -113,8 +115,7 @@ class TemplateCreator {
       'DerivedData',
     };
 
-    await for (final entity
-        in source.list(recursive: false, followLinks: false)) {
+    await for (final entity in source.list(recursive: false, followLinks: false)) {
       try {
         final base = p.basename(entity.path);
         // Skip symlinks entirely
@@ -154,8 +155,7 @@ class TemplateCreator {
     );
 
     content = content.replaceAll(
-      RegExp(r'^\s*executables:\s*\n(?:[ \t]+.*\n?)*',
-          multiLine: true, dotAll: true),
+      RegExp(r'^\s*executables:\s*\n(?:[ \t]+.*\n?)*', multiLine: true, dotAll: true),
       '',
     );
 
@@ -164,8 +164,7 @@ class TemplateCreator {
       '',
     );
 
-    content =
-        content.replaceAll('https://github.com/BansookNam/fast_app_base', '');
+    content = content.replaceAll('https://github.com/BansookNam/fast_app_base', '');
 
     // Remove command-line dependencies and their comment from dependencies
     content = content.replaceAll(
@@ -192,15 +191,14 @@ class TemplateCreator {
         '    - assets/translations/\n'
         '    - assets/\n';
 
-    final flutterSectionRegex =
-        RegExp(r'^flutter:\s*\n(?:^[ \t].*\n?)*', multiLine: true);
+    final flutterSectionRegex = RegExp(r'^flutter:\s*\n(?:^[ \t].*\n?)*', multiLine: true);
     if (flutterSectionRegex.hasMatch(content)) {
       content = content.replaceFirst(
         flutterSectionRegex,
         'flutter:\n\n$assetsBlock',
       );
     } else {
-      content = content.trimRight() + '\n\nflutter:\n\n' + assetsBlock;
+      content = '${content.trimRight()}\n\nflutter:\n\n$assetsBlock';
     }
 
     content = content.replaceAll(RegExp(r'\n\n+'), '\n\n');
@@ -210,8 +208,7 @@ class TemplateCreator {
 
   Future<void> _rewritePackageReferences() async {
     final exts = {'.dart', '.yaml', '.yml'};
-    await for (final entity
-        in _projectDir.list(recursive: true, followLinks: false)) {
+    await for (final entity in _projectDir.list(recursive: true, followLinks: false)) {
       if (entity is! File) continue;
       final ext = p.extension(entity.path).toLowerCase();
       if (!exts.contains(ext)) continue;

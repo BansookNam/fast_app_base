@@ -1,5 +1,4 @@
 import 'package:fast_app_base/common/theme/custom_theme.dart';
-import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'item/preference_item.dart';
@@ -48,7 +47,7 @@ class AppPreferences {
           return _prefs.setString(key, (value as DateTime).toIso8601String());
         default:
           if (value is Enum) {
-            return _prefs.setString(key, describeEnum(value));
+            return _prefs.setString(key, value.name);
           } else {
             throw Exception('$T 타입에 대한 저장 transform 함수를 추가 해주세요.');
           }
@@ -69,7 +68,7 @@ class AppPreferences {
           return _prefs.setString(key, (value as DateTime).toIso8601String());
         default:
           if (value is Enum) {
-            return _prefs.setString(key, describeEnum(value));
+            return _prefs.setString(key, value.name);
           } else {
             throw Exception('$T 타입에 대한 저장 transform 함수를 추가 해주세요.');
           }
