@@ -8,10 +8,8 @@ const String kVersion = '0.0.1+9';
 
 void main(List<String> arguments) async {
   final parser = ArgParser()
-    ..addFlag('help',
-        abbr: 'h', negatable: false, help: 'Shows usage information.')
-    ..addFlag('version',
-        abbr: 'v', negatable: false, help: 'Shows the package version.');
+    ..addFlag('help', abbr: 'h', negatable: false, help: 'Shows usage information.')
+    ..addFlag('version', abbr: 'v', negatable: false, help: 'Shows the package version.');
   final argResults = parser.parse(arguments);
 
   if (argResults['version'] as bool) {
@@ -23,6 +21,7 @@ void main(List<String> arguments) async {
     final options = <String>[
       'Mobile only (Android + iOS)',
       'Desktop only (macOS)',
+      'Desktop and Mobile (Android + iOS + macOS)',
       'Desktop and web (macOS + Web)',
       'All Platforms (Android + iOS + macOS + Web)',
       'Quit',
@@ -43,10 +42,12 @@ void main(List<String> arguments) async {
         case 2:
           return {'macos'};
         case 3:
-          return {'macos', 'web'};
+          return {'android', 'ios', 'macos'};
         case 4:
-          return {'android', 'ios', 'macos', 'web'};
+          return {'macos', 'web'};
         case 5:
+          return {'android', 'ios', 'macos', 'web'};
+        case 6:
           stdout.writeln('Cancelled.');
           exit(0);
         default:
@@ -63,8 +64,7 @@ void main(List<String> arguments) async {
   final projectName = argResults.rest.first;
   final namePattern = RegExp(r'^[a-z0-9_]+$');
   if (!namePattern.hasMatch(projectName)) {
-    print(
-        'Error: Project name must be snake_case (lowercase letters, numbers, and underscores only).\n'
+    print('Error: Project name must be snake_case (lowercase letters, numbers, and underscores only).\n'
         'Examples: my_app, my_app2');
     exit(64);
   }
